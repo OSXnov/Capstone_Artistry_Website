@@ -1,13 +1,15 @@
 h1{
     color:black;
+  
 }
+
 
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: goldenrod;
+    background-color: white;
   }
   
   li {
@@ -16,12 +18,17 @@ ul {
   
   li a {
     display: block;
-    color: white;
+    color: burlywood;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    font-family: MontSerrat;
   }
   
   li a:hover {
     background-color: #111;
+  }
+  @font-face {
+    font-family: MontSerrat;
+    src: url(/Font/Montserrat/Montserrat-VariableFont_wght.ttf);
   }

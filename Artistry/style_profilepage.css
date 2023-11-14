@@ -7,7 +7,7 @@ h1{
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: goldenrod;
+    background-color: white;
   }
   
   .NavBar li {
@@ -16,12 +16,17 @@ h1{
   
  .NavBar li a {
     display: block;
-    color: white;
+    color: burlywood;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    font-family: MontSerrat;
   }
   
   .NavBar a:hover {
     background-color: #111;
+  }
+  @font-face {
+    font-family: MontSerrat;
+    src: url(/Font/Montserrat/Montserrat-VariableFont_wght.ttf);
   }
