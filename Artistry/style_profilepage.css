@@ -2,7 +2,7 @@ h1{
     color:black;
 }
 
-ul {
+.NavBar ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -10,11 +10,11 @@ ul {
     background-color: goldenrod;
   }
   
-  li {
+  .NavBar li {
     float: right;
   }
   
-  li a {
+ .NavBar li a {
     display: block;
     color: white;
     text-align: center;
@@ -22,6 +22,6 @@ ul {
     text-decoration: none;
   }
   
-  li a:hover {
+  .NavBar a:hover {
     background-color: #111;
   }
