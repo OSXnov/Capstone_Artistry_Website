@@ -8,10 +8,12 @@ h1{
     padding: 0;
     overflow: hidden;
     background-color: white;
+    
   }
   
   .NavBar li {
     float: right;
+  
   }
   
  .NavBar li a {
@@ -21,6 +23,7 @@ h1{
     padding: 14px 16px;
     text-decoration: none;
     font-family: MontSerrat;
+   
   }
   
   .NavBar a:hover {
@@ -30,3 +33,21 @@ h1{
     font-family: MontSerrat;
     src: url(/Font/Montserrat/Montserrat-VariableFont_wght.ttf);
   }
+
+  p{
+    display: block;
+    color:burlywood;
+    text-align: center;
+    font-family:MontSerrat;
+
+  }
+.LISU_button li a{
+  display: block;
+  text-align: center;
+  color: burlywood;
+  font-family: MontSerrat;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+  
