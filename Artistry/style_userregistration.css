@@ -1,13 +1,9 @@
-
-form{
-    display: block;
-    color: burlywood;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-family: MontSerrat;
-    
+body {
+  font-family: MontSerrat;
+  margin: 0;
+  padding: 0;
 }
+
 .Divider hr {
   border: none;
   border-top: 2px solid burlywood;
@@ -15,34 +11,31 @@ form{
 }
 
 @font-face {
-    font-family: MontSerrat;
-    src: url(/Font/Montserrat/Montserrat-VariableFont_wght.ttf);
-  }
+  font-family: MontSerrat;
+  src: url(/Font/Montserrat/Montserrat-VariableFont_wght.ttf);
+}
 
-  .NavBar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: white;
-    
-  }
-  
-  .NavBar li {
-    float: right;
-  
-  }
-  
- .NavBar li a {
-    display: block;
-    color: burlywood;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-family: MontSerrat;
-   
-  }
-  
-  .NavBar a:hover {
-    background-color: #111;
-  }
+.NavBar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: white;
+}
+
+.NavBar li {
+  float: right;
+}
+
+.NavBar li a {
+  display: block;
+  color: burlywood;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family: MontSerrat;
+}
+
+.NavBar a:hover {
+  background-color: #111;
+}
