@@ -1,0 +1,45 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Artistry</title>
+    <link rel="stylesheet" type="text/css" href="style_userregistration.css">
+</head>
+
+<body>
+
+    <header>
+        <img src = "/Images/Artistry_HorizontalLogo.PNG" style="width: 300px; height:100px">
+        <nav>
+            <div class="NavBar">
+            <ul>
+            <li><a href="HomePage.html">Home</a></li>
+            <li><a href="MediumPage.html">Medium</a></li>
+            <li><a href="ProfilePage.html">Profile</a>
+            </ul>
+            </div>
+        </nav>
+
+    </header>
+    <div class="Divider"> <hr> </div> <!-- horizontal line that divides -->
+        <form id="registrationForm">
+
+            <h1>Welcome, complete the registration:</h1>
+            <label for="fname"> First Name: </label>
+            <input type="text" id="fname" name="fname" required><br>
+            <label for="lname"> Last Name: </label>
+            <input type="text" id="lname" name="lname" required><br>
+            <label for="age"> Age: </label>
+            <input type="text" id="age" name="age" required><br>
+            <label for="uname"> Username: </label>
+            <input type="text" id="uname" name="uname" required><br>
+            <label for="pwd">Password:</label>
+            <input type="password" id="pwd" name="pwd" required><br>
+            <label for="email">Email: </label>
+            <input type="text" id="email" name="email" required><br>
+            <button type="button" onclick="submitForm()">Submit</button>
+        
+        </form>
+        
+        <script src="./script.js"></script>
+    </body>
+</html>
