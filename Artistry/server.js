@@ -7,15 +7,18 @@ const app = express();
 const port = 5500;
 
 app.use(cors());
-
+ 
 
 //MYSQL connection
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
+  host:  'localhost', //LATER DO A .ENV FILE WITH ALL THE CONNECTIONS.
+  user:  'root',
   password: 'STT_ArtistryUserReg_2023',
-  database: 'mydatabase',
-});
+  database:   'mydatabase',
+}).promise(); //added promise function
+
+
+
 
 // Connect to MySQL
 connection.connect((err) => {

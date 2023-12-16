@@ -16,12 +16,33 @@ body {
   margin-left: 20px;
 }
 
+.Left-Side, .Right-Side {
+  float: left;
+  width: 50%; /* Each div takes half of the container width */
+}
+
+.Left-Side ul,
+.Right-Side ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.Left-Side li,
+.Right-Side li {
+  margin-bottom: 8px;
+}
+
 .profile-picture-container {
   width: 150px;
   height: 150px;
   overflow: hidden;
   border-radius: 50%;
   background-color: burlywood;
+<<<<<<< HEAD
+=======
+  margin-left: 20px;
+>>>>>>> 11e0b9423f2ed08f83ca322791e57ba92b77f9fe
   box-shadow: 5px 5px 10px rgba(139, 69, 19, 0.5);
   margin-top: 20px;
 }
@@ -33,6 +54,7 @@ body {
   border-radius: 50%;
 }
 
+<<<<<<< HEAD
 .profile-content {
   display: flex;
   flex-direction: column;
@@ -50,11 +72,31 @@ body {
 
 .about-me h2 {
   color: black;
+=======
+.about-me,
+.images-userprofile {
+  text-align: justify;
+>>>>>>> 11e0b9423f2ed08f83ca322791e57ba92b77f9fe
 }
 
+.images-userprofile {
+  float: right;
+  text-align: right;
+}
+
+.images-userprofile h2,
+.images-userprofile p {
+  color: burlywood;
+}
+
+.about-me h2,
 .about-me p {
+<<<<<<< HEAD
   color: black;
   text-align: justify;
+=======
+  color: burlywood;
+>>>>>>> 11e0b9423f2ed08f83ca322791e57ba92b77f9fe
 }
 
 /* Additional styles for the image tags on the right */
