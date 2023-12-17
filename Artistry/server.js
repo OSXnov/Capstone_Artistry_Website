@@ -15,7 +15,7 @@ const connection = mysql.createConnection({
   user:  'root',
   password: 'STT_ArtistryUserReg_2023',
   database:   'mydatabase',
-}).promise(); //added promise function
+})//.promise(); //added promise function
 
 
 
