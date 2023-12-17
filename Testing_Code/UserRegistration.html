@@ -12,9 +12,9 @@
         <nav>
             <div class="NavBar">
             <ul>
-            <li><a href="HomePage.html">Home</a></li>
-            <li><a href="MediumPage.html">Medium</a></li>
             <li><a href="ProfilePage.html">Profile</a>
+            <li><a href="MediumPage.html">Medium</a></li> 
+            <li><a href="HomePage.html">Home</a></li>
             </ul>
             </div>
         </nav>
@@ -22,9 +22,27 @@
     </header>
     <div class="Divider"> <hr> </div> <!-- horizontal line that divides -->
         <form id="registrationForm">
-
-            <h1>Welcome, complete the registration:</h1>
-            <label for="fname"> First Name: </label>
+            <style> 
+                input[type=text] {
+                  width: 20%;
+                  padding: 12px;
+                  margin: 8px 0;
+                  box-sizing: border-box;
+                  border: #d3d3d3;
+                  border-radius: 4px;
+                  background-color: #d3d3d3;
+                  color: black;
+                }
+                input[type=text]:focus {
+                    background-color: rgb(132, 162, 172);
+                    border: 3px solid #555;
+                }
+                </style>
+            <div style = "position:relative; left:140px;">
+            <h1>SIGN IN</h1></div>
+            <div style = "position:relative; left:1000px;">
+            <font size="+1">
+            <label for="fname"> First Name: </label>   
             <input type="text" id="fname" name="fname" required><br>
             <label for="lname"> Last Name: </label>
             <input type="text" id="lname" name="lname" required><br>
@@ -32,12 +50,13 @@
             <input type="text" id="age" name="age" required><br>
             <label for="uname"> Username: </label>
             <input type="text" id="uname" name="uname" required><br>
-            <label for="pwd">Password:</label>
-            <input type="password" id="pwd" name="pwd" required><br>
             <label for="email">Email: </label>
             <input type="text" id="email" name="email" required><br>
-            <button type="button" onclick="submitForm()">Submit</button>
-        
+            <label for="pwd">Password:</label>
+            <input type="password" id="pwd" name="pwd" required><br>
+        </font>
+        <button type="button" onclick="submitForm()">Submit</button>
+        </div>
         </form>
         
         <script src="./script.js"></script>
