@@ -1,17 +1,24 @@
 const express = require('express');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 const port = 5500;
 
-// Create a MySQL connection
+app.use(cors());
+ 
+
+//MYSQL connection
 const connection = mysql.createConnection({
-  host: 'your-mysql-host',
-  user: 'your-mysql-username',
-  password: 'your-mysql-password',
-  database: 'your-database-name',
-});
+  host:  'localhost', //LATER DO A .ENV FILE WITH ALL THE CONNECTIONS.
+  user:  'root',
+  password: 'STT_ArtistryUserReg_2023',
+  database:   'mydatabase',
+})//.promise(); //added promise function
+
+
+
 
 // Connect to MySQL
 connection.connect((err) => {
@@ -43,7 +50,7 @@ app.post('/register', (req, res) => {
       res.status(200).send('User registered successfully');
     }
   });
-});
+}); 
 
 // Start the server
 app.listen(port, () => {

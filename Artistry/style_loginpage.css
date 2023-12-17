@@ -2,6 +2,11 @@ h1{
     color: darkgray;
   
 }
+.Divider hr {
+  border: none;
+  border-top: 2px solid burlywood;
+  margin: 0;
+}
 
 
 ul {
