@@ -11,11 +11,11 @@ app.use(cors());
 
 //MYSQL connection
 const connection = mysql.createConnection({
-  host:  'localhost', //LATER DO A .ENV FILE WITH ALL THE CONNECTIONS.
+  host:  'localhost', 
   user:  'root',
   password: 'STT_ArtistryUserReg_2023',
-  database:   'mydatabase',
-})//.promise(); //added promise function
+  database: 'artistry',
+})
 
 
 
@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 // Handle form submission
-app.post('http://localhost:5500/register', (req, res) => {
+app.post('/register', (req, res) => {
   const { fname, lname, age, uname, pwd, email } = req.body;
 
   // Insert data into the database
