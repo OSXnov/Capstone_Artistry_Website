@@ -8,9 +8,8 @@
 </head>
 
 <body>
-
     <header>
-        <img src="/Images/Artistry_HorizontalLogo.PNG" style="width: 300px; height:100px">
+        <img src="/Images/Artistry_HorizontalLogo.PNG" style="width: 100%; max-width: 300px; height: auto;">
         <nav>
             <div class="NavBar">
                 <ul>
@@ -24,10 +23,10 @@
         <div class="Divider"> <hr> </div> <!-- horizontal line that divides -->
         <form id="registrationForm">
             <div class="container">
-                <div style="position:relative; left:140px;">
+                <div style="position:relative; left:0;">
                     <h1>SIGN IN</h1>
                 </div>
-                <div style="position:relative; left:900px;">
+                <div style="position:relative; left:0;">
                     <div class="row">
                         <div class="col-75">
                             <input type="text" id="fname" name="firstname" placeholder="NAME">
@@ -62,7 +61,7 @@
                     </div>
                     <div class="col-25">
                         <div class="col-75">
-                            <div style="position:relative; right:350px;">
+                            <div style="position:relative; right:0;">
                                 <button type="button" onclick="submitForm()">Submit</button>
                             </div>
                         </div>
@@ -70,7 +69,8 @@
                 </div>
             </div>
         </form>
+        <script src="./submit_UserReg.js"></script>
     </header>
-    <script src="./submit_UserReg.js"></script>
+    
 </body>
 </html>

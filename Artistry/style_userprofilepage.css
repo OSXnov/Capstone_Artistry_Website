@@ -39,10 +39,7 @@ body {
   overflow: hidden;
   border-radius: 50%;
   background-color: burlywood;
-<<<<<<< HEAD
-=======
   margin-left: 20px;
->>>>>>> 11e0b9423f2ed08f83ca322791e57ba92b77f9fe
   box-shadow: 5px 5px 10px rgba(139, 69, 19, 0.5);
   margin-top: 20px;
 }
@@ -54,29 +51,9 @@ body {
   border-radius: 50%;
 }
 
-<<<<<<< HEAD
-.profile-content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-left: 20px;
-}
-
-.about-me {
-  text-align: left;
-  width: 300px; /* Adjust the width of the box containing the text */
-  padding: 20px; /* Add+ padding to the box containing the text */
-  background-color: burlywood; /* Set background color for the box containing the text */
-  border-radius: 10px; /* Add border-radius to the box containing the text */
-}
-
-.about-me h2 {
-  color: black;
-=======
 .about-me,
 .images-userprofile {
   text-align: justify;
->>>>>>> 11e0b9423f2ed08f83ca322791e57ba92b77f9fe
 }
 
 .images-userprofile {
@@ -91,12 +68,7 @@ body {
 
 .about-me h2,
 .about-me p {
-<<<<<<< HEAD
-  color: black;
-  text-align: justify;
-=======
   color: burlywood;
->>>>>>> 11e0b9423f2ed08f83ca322791e57ba92b77f9fe
 }
 
 /* Additional styles for the image tags on the right */
