@@ -20,7 +20,7 @@ function submitForm() {
     })
     .then(data => {
         console.log(data); // Display success message or handle as needed
-    })
+    }) 
     .catch(error => {
         console.error('Error:', error);
         // Handle errors here
