@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 // Handle form submission
-app.post('/register', (req, res) => {
+app.post('http://localhost:5500/register', (req, res) => {
   const { fname, lname, age, uname, pwd, email } = req.body;
 
   // Insert data into the database
