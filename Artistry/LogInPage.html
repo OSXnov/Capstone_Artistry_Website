@@ -23,7 +23,7 @@
         <div class="Divider"> <hr> </div> <!-- horizontal line that divides -->
 
 
-            <form>
+            <form id="LogInForm">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
 
@@ -33,7 +33,10 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
 
-                <button type="submit">Register</button>
+                <button type="button" onclick="LogIn()">Log In</button>
             </form>
+
+
+            <script src="./Apps/button_LogIn.js"></script>
     </body>
 </html>
