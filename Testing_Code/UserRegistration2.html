@@ -1,80 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Artistry</title>
+    <title>Artistry</title>
     <link rel="stylesheet" type="text/css" href="style_userregistration.css">
 </head>
 
 <body>
 
     <header>
-        <img src = "/Images/Artistry_HorizontalLogo.PNG" style="width: 300px; height:100px">
+        <img src="/Images/Artistry_HorizontalLogo.PNG" style="width: 300px; height:100px">
         <nav>
             <div class="NavBar">
-            <ul>
-            <li><a href="ProfilePage.html">Profile</a>
-            <li><a href="MediumPage.html">Medium</a></li> 
-            <li><a href="HomePage.html">Home</a></li>
-            </ul>
+                <ul>
+                    <li><a href="ProfilePage.html">Profile</a></li>
+                    <li><a href="MediumPage.html">Medium</a></li> 
+                    <li><a href="HomePage.html">Home</a></li>
+                </ul>
             </div>
         </nav>
 
-    
-    <div class="Divider"> <hr> </div> <!-- horizontal line that divides -->
+        <div class="Divider"> <hr> </div> <!-- horizontal line that divides -->
         <form id="registrationForm">
-
-</head>
-</header>
-<body>
-
-
-  <div class = "container">
-  <div style = "position:relative; left:140px;">
-      <h1>SIGN IN</h1></div>
-  <div style = "position:relative; left:900px;">
-
-
-    <div class="row">
-  
-      <div class="col-75">
-        <input type="text" id="fname" name="firstname" placeholder="NAME">
-      </div>
-    </div>
-    <div class="row">
-    
-      <div class="col-75">
-        <input type="text" id="lname" name="lastname" placeholder="LAST NAME">
-      </div>
-      <div class="row">
-    <div class="col-25"> <div class="col-75">
-              <input type="text" id="age" name="age" placeholder = "AGE" required><br>
-          
-      </div>
-      <div class= "col-25">  <div class="col-75">
-      <input type="text" id="uname" name="uname" placeholder = "USERNAME" required><br>
-      </div>
-
-      <div class= "col-25">  <div class="col-75">
-      <input type="text" id="email" name="email" placeholder = "EMAIL" required><br>
-      </div>
-      
-      <div class= "col-25">  <div class="col-75">
-      <input type="password" id="pwd" name="pwd" placeholder = "PASSWORD" required><br>
-  </div>
-  </div>
-  </div>
-
-  <div class= "col-25">  <div class="col-75">
-      <div style = "position:relative; right:350px;">
-        <button type="button" onclick="submitForm()">Submit</button>
-  </div>
-  </div>
-
-  </div>
-  <br>
-    </form>
-  </div>
-          </div>
-          <script src="./submit_UserReg.js"></script>
-    </body>
+            <div class="container">
+                <div style="position:relative; left:140px;">
+                    <h1>SIGN IN</h1>
+                </div>
+                <div style="position:relative; left:900px;">
+                    <div class="row">
+                        <div class="col-75">
+                            <input type="text" id="fname" name="firstname" placeholder="NAME">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-75">
+                            <input type="text" id="lname" name="lastname" placeholder="LAST NAME">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <div class="col-75">
+                                <input type="text" id="age" name="age" placeholder="AGE" required><br>
+                            </div>
+                        </div>
+                        <div class="col-25">
+                            <div class="col-75">
+                                <input type="text" id="uname" name="uname" placeholder="USERNAME" required><br>
+                            </div>
+                        </div>
+                        <div class="col-25">
+                            <div class="col-75">
+                                <input type="text" id="email" name="email" placeholder="EMAIL" required><br>
+                            </div>
+                        </div>
+                        <div class="col-25">
+                            <div class="col-75">
+                                <input type="password" id="pwd" name="pwd" placeholder="PASSWORD" required><br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-25">
+                        <div class="col-75">
+                            <div style="position:relative; right:350px;">
+                                <button type="button" onclick="submitForm()">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </header>
+    <script src="./submit_UserReg.js"></script>
+</body>
 </html>

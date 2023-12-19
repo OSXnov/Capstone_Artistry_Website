@@ -4,8 +4,8 @@ function LogIn() {
 
     // Convert FormData to URLSearchParams
     const urlSearchParams = new URLSearchParams(formData);
-
-    fetch('http://localhost:5500/register', {
+ 
+    fetch('http://localhost:5500/login', {
         method: 'POST',
         body: urlSearchParams,
         headers: {
