@@ -39,3 +39,60 @@ body {
 .NavBar a:hover {
   background-color: #111;
 }
+
+input[type=text],
+input[type=password], /* Added for password field */
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  resize: vertical;
+  background-color: rgb(204, 193, 175);
+}
+
+input[type=text]:focus,
+input[type=password]:focus { /* Added for password field */
+  background-color: lightblue;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: burlywood;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+input[type=submit]:hover {
+  background-color: grey;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: white;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.col-25,
+.col-75 {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}

@@ -11,16 +11,16 @@ app.use(cors());
 
 //MYSQL connection
 const connection = mysql.createConnection({
-  host:  'localhost', //LATER DO A .ENV FILE WITH ALL THE CONNECTIONS.
+  host:  'localhost', 
   user:  'root',
   password: 'STT_ArtistryUserReg_2023',
-  database:   'mydatabase',
-})//.promise(); //added promise function
+  database: 'artistry',
+})
 
 
 
 
-// Connect to MySQL
+// Connect to MySQL 
 connection.connect((err) => {
   if (err) {
     console.error('Error connecting to MySQL:', err);
@@ -31,9 +31,13 @@ connection.connect((err) => {
 
 // Middleware to parse form data
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// Serve static files (like your HTML)
-app.use(express.static('public'));
+// Serve JavaScript files from the 'Apps' directory with correct MIME type
+app.use('/Apps', (req, res, next) => {
+  if (req.url.endsWith('.js')) {
+    res.type('application/javascript');
+  }
+  express.static(path.join(__dirname, 'Apps'))(req, res, next);
+});
 
 // Handle form submission
 app.post('/register', (req, res) => {

@@ -1,11 +1,11 @@
-function submitForm() {
-    const form = document.getElementById("registrationForm");
+function LogIn() {
+    const form = document.getElementById("LogInForm");
     const formData = new FormData(form);
 
     // Convert FormData to URLSearchParams
     const urlSearchParams = new URLSearchParams(formData);
-
-    fetch('http://localhost:5500/register', {
+ 
+    fetch('http://localhost:5500/login', {
         method: 'POST',
         body: urlSearchParams,
         headers: {
@@ -20,7 +20,7 @@ function submitForm() {
     })
     .then(data => {
         console.log(data); // Display success message or handle as needed
-    })
+    }) 
     .catch(error => {
         console.error('Error:', error);
         // Handle errors here
