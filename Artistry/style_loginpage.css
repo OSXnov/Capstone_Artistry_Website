@@ -1,4 +1,4 @@
-h1{
+body {
     color: darkgray;
   
 }
@@ -9,7 +9,7 @@ h1{
 }
 
 
-ul {
+.NavBar ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -17,11 +17,11 @@ ul {
     background-color: white;
   }
   
-  li {
+  .NavBar li {
     float: right;
   }
   
-  li a {
+  .NavBar li a {
     display: block;
     color: burlywood;
     text-align: center;
@@ -30,7 +30,7 @@ ul {
     font-family: MontSerrat;
   }
   
-  li a:hover {
+  .NavBar li a:hover {
     background-color: #111;
   }
   @font-face {
