@@ -15,7 +15,7 @@ class Artist {
     this.description = ''; //"About Me:"
     this.tags = this.tags || [];
   }
-
+//------------------------------------------------------------------------------------------------- PROFILE
   //Create a new profile
   static createProfile(name, lastName, ID, email, password) {
     return new Artist(name, lastName, ID, email, password);
@@ -27,6 +27,7 @@ class Artist {
     // This could include clearing data, logging out the user, etc.
     console.log(`Profile for ${this.name} ${this.lastName} deleted.`);
   }
+//------------------------------------------------------------------------------------------------- NAME
 
   //Change artist name
   changeName(newName) {
@@ -50,7 +51,7 @@ class Artist {
    }
  }
 
-
+//------------------------------------------------------------------------------------------------- PASSWORD
   //Change password
   changePassword(oldPassword, newPassword) {
     if (oldPassword === this.password) {
@@ -60,7 +61,7 @@ class Artist {
       console.log("Incorrect old password. Password not changed.");
     }
   }
-
+//------------------------------------------------------------------------------------------------- ARTIST'S ARTWORKS
    //Add an artwork to the artist's collection
   addArtwork(title, medium, year, desc, img) {
     const artwork = new Artwork(title, medium, year, this.name, this.ID, desc, img);
@@ -108,6 +109,12 @@ class Artist {
     }
   }
 
+  //Like an artwork
+   likeArtwork(artwork) {
+      this.likes.push(artwork);
+  }
+  
+//------------------------------------------------------------------------------------------------- FOLLOWERS & FOLLOWS
   //Add a follower
   addFollower(follower) {
     // Check if the follower is not already in the followers list
@@ -153,7 +160,7 @@ class Artist {
       console.log(`${follower.name} is not a follower.`);
     }
   }
-  
+//------------------------------------------------------------------------------------------------- PFP
   //Set profile picture
   setProfilePicture(profilePicture) {
     this.profilePicture = profilePicture;
@@ -171,11 +178,12 @@ class Artist {
     console.log("Profile picture removed successfully.");
   }
 
-  //Like an artwork
+    //Like an artwork
   likeArtwork(artwork) {
     this.likes.push(artwork);
   }
 
+//------------------------------------------------------------------------------------------------- DESCRIPTION
   // Set user description
   setDescription(aDescription) {
    this.description = aDescription;
@@ -198,7 +206,7 @@ class Artist {
     this.description = null;
     console.log("Artist description removed successfully.");
   }
-
+//------------------------------------------------------------------------------------------------- TAGS
   addTag(tag) {
     // Check if the tag is in the predefined list
     switch (tag.toLowerCase()) {
@@ -283,6 +291,86 @@ class Artist {
   displayTags() {
     console.log(`${this.name}'s tags: ${this.tags.join(', ')}`);
   }
+
+  changeTag(oldTag, newTag) { //check if it works
+    const index = this.tags.indexOf(oldTag);
+    if (index !== -1) {
+      // Check if the new tag is in the predefined list
+      switch (newTag.toLowerCase()) {
+          case 'pai':// -----------------------//Painting tag
+             this.tags.push('Painting');
+             break;
+         case 'dra':// -----------------------//Drawing tag
+            this.tags.push('Drawing');
+           break;
+          case 'scul':// -----------------------//Sculpture tag
+            this.tags.push('Sculpture');
+            break;
+          case 'pri':// -----------------------//Printmaking tag
+            this.tags.push('Printmaking');
+            break;
+          case 'dig':// -----------------------//Digital Art tag
+            this.tags.push('Digital Art');
+            break;
+          case 'pho':// -----------------------//Photography tag
+            this.tags.push('Photography');
+            break;  
+          case 'mix':// -----------------------//Mixed Media tag
+            this.tags.push('Mixed Media');
+            break;  
+          case 'tex':// -----------------------//Textile Art tag
+            this.tags.push('Textile Art');
+            break;
+          case 'cer':// -----------------------//Ceramics tag
+            this.tags.push('Ceramics');
+            break;
+          case 'gla':// -----------------------//Glass Art tag
+            this.tags.push('Glass Art');
+            break;
+          case 'col':// -----------------------//Collage tag
+            this.tags.push('Collage');
+            break;
+          case 'per':// -----------------------//Performance Art tag
+            this.tags.push('Performance Art');
+            break;
+          case 'str':// -----------------------//Street Art tag
+            this.tags.push('Street Art');
+            break;
+          case 'mos':// -----------------------//Mosaics tag
+            this.tags.push('Mosaics');
+            break;
+          case 'pen':// -----------------------//Pen and Ink tag
+            this.tags.push('Pen and Ink');
+            break;
+          case 'met':// -----------------------//Metalwork tag
+            this.tags.push('Metalwork');
+            break;
+          case 'cal':// -----------------------//Calligraphy tag
+            this.tags.push('Calligraphy');
+            break;
+          case 'ani':// -----------------------//Digital Animation tag
+            this.tags.push('Digital Animation');
+            break;
+
+        default:
+          console.log('Invalid tag');
+      }
+    } else {
+      console.log(`${oldTag} not found in tags.`);
+    }
+  }
+
+  deleteTag(tag) {//check if it works
+    const index = this.tags.indexOf(tag);
+    if (index !== -1) {
+      this.tags.splice(index, 1);
+      console.log(`${tag} deleted from tags.`);
+    } else {
+      console.log(`${tag} not found in tags.`);
+    } 
+//------------------------------------------------------------------------------------------------- TAGS
+  }
+
 }
 
  /*Example: working!
