@@ -13,6 +13,7 @@ class Artist {
     this.profilePicture = null; // assuming its an image object idk what type it should be
     this.likes = [];
     this.description = ''; //"About Me:"
+    this.tags = this.tags || [];
   }
 
   //Create a new profile
@@ -197,6 +198,91 @@ class Artist {
     this.description = null;
     console.log("Artist description removed successfully.");
   }
+
+  addTag(tag) {
+    // Check if the tag is in the predefined list
+    switch (tag.toLowerCase()) {
+      case 'pai':// -----------------------//Painting tag
+        this.tags.push('Painting');
+        break;
+
+      case 'dra':// -----------------------//Drawing tag
+        this.tags.push('Drawing');
+        break;
+
+      case 'scul':// -----------------------//Sculpture tag
+        this.tags.push('Sculpture');
+        break;
+
+      case 'pri':// -----------------------//Printmaking tag
+        this.tags.push('Printmaking');
+        break;
+
+      case 'dig':// -----------------------//Digital Art tag
+        this.tags.push('Digital Art');
+        break;
+
+      case 'pho':// -----------------------//Photography tag
+        this.tags.push('Photography');
+        break;  
+
+      case 'mix':// -----------------------//Mixed Media tag
+        this.tags.push('Mixed Media');
+        break;  
+
+      case 'tex':// -----------------------//Textile Art tag
+        this.tags.push('Textile Art');
+        break;
+
+      case 'cer':// -----------------------//Ceramics tag
+        this.tags.push('Ceramics');
+        break;
+
+      case 'gla':// -----------------------//Glass Art tag
+        this.tags.push('Glass Art');
+        break;
+
+      case 'col':// -----------------------//Collage tag
+        this.tags.push('Collage');
+        break;
+
+      case 'per':// -----------------------//Performance Art tag
+        this.tags.push('Performance Art');
+        break;
+
+      case 'str':// -----------------------//Street Art tag
+        this.tags.push('Street Art');
+        break;
+
+      case 'mos':// -----------------------//Mosaics tag
+        this.tags.push('Mosaics');
+        break;
+
+      case 'pen':// -----------------------//Pen and Ink tag
+        this.tags.push('Pen and Ink');
+        break;
+
+      case 'met':// -----------------------//Metalwork tag
+        this.tags.push('Metalwork');
+        break;
+
+      case 'cal':// -----------------------//Calligraphy tag
+        this.tags.push('Calligraphy');
+        break;
+        
+      case 'ani':// -----------------------//Digital Animation tag
+        this.tags.push('Digital Animation');
+        break;
+
+        // Add more cases for other tags
+      default:
+        console.log('Invalid tag');
+    }
+  }
+
+  displayTags() {
+    console.log(`${this.name}'s tags: ${this.tags.join(', ')}`);
+  }
 }
 
  /*Example: working!
@@ -216,6 +302,9 @@ class Artist {
  artist.changePassword("password123", "newpassword456");
  artist.editArtwork(0, "New Sunset", "watercolors", 2021, artist.name, artist.ID, "A pretty sunset painting", null);
  artist.deleteArtwork(1);
+ artist.addTag('pai');
+ artist.addTag('dra');
+ artist2.addTag('y'); //invalid tag test
  
  artist.setProfilePicture("https://example.com/new-profile.jpg");
  artist.removeProfilePicture();
