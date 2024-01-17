@@ -16,10 +16,18 @@ function LogIn() {
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        return response.text();
+        return response.text(); 
     })
     .then(data => {
         console.log(data); // Display success message or handle as needed
+
+        // Check if login was successful (you might need to adjust this based on your actual server response)
+        if (data.message === 'Login successful') {
+            // Redirect to the ProfilePage.html
+            window.location.href = '/Artistry/UserProfilePage.html';
+        } else {
+            // Handle other cases if needed
+        }
     }) 
     .catch(error => {
         console.error('Error:', error);
