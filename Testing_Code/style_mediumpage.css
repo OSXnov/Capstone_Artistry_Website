@@ -1,0 +1,107 @@
+h1{
+    color:black;
+}
+.Divider hr {
+ border: none;
+ border-top: 2px solid burlywood;
+ margin: 0;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+ }
+  
+ li {
+    float: right;
+ }
+  
+ li a {
+    display: block;
+    color: burlywood;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: MontSerrat;
+ }
+  
+ li a:hover {
+    background-color: #111;
+ }
+ @font-face {
+    font-family: MontSerrat;
+    src: url(/Font/Montserrat/Montserrat-VariableFont_wght.ttf);
+ }
+ p{
+    display: block;
+    color:burlywood;
+    text-align: center;
+    font-family:MontSerrat;
+
+ }
+
+
+/* Add this part to style the slideshow and navigation arrows */
+.slideshow-container {
+    display: flex;
+    overflow: hidden;
+}
+
+.slideshow {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    flex: 0 0 300px;
+    margin-right: 16px;
+}
+
+.slide:last-child {
+    margin-right: 0;
+}
+
+.slide img {
+    width: 100%;
+    height: auto;
+}
+
+.title {
+    margin-top: 8px;
+    text-align: center;
+}
+
+.view-more {
+    display: block;
+    margin-top: 16px;
+    text-align: center;
+}
+
+/* Navigation arrows */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -25px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    transition: background-color 0.3s;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
