@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <link rel="stylesheet" type="text/css" href="style_loginpage.css">
+</head>
+<body>
+    <header>
+        <img src="/Images/Artistry_HorizontalLogo.PNG" style="width: 300px; height:100px">
+        <nav>
+            <div class="NavBar">
+                <ul>
+                    <li><a href="HomePage.html">Home</a></li>
+                    <li><a href="MediumPage.html">Medium</a></li>
+                    <li><a href="ProfilePage.html">Profile</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="Divider"><hr></div> <!-- horizontal line that divides -->
+
+    <form id="registrationForm">
+        <div class="container">
+            <div class="SIGNIN">
+                <h1>Sign In</h1>
+            </div>
+            
+            <div class="UserName"> 
+                <input type="text" id="uname" name="uname" placeholder="USERNAME" required>
+            </div>
+            <div class="Password"> 
+                <input type="password" id="pwd" name="pwd" placeholder="PASSWORD" required>
+            </div>
+            
+            <div class="Button"> 
+                <button type="button" onclick="submitForm()">Submit</button>
+            </div>
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="ErrorMessage"></div>
+        </div>
+    </form>
+
+    <script src="./Apps/button_LogIn.js"></script>
+</body>
+</html>

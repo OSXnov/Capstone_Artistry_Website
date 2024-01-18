@@ -1,0 +1,116 @@
+body {
+    font-family: MontSerrat;
+    margin: 0;
+    padding: 0;
+}
+
+.Divider hr {
+    border: none;
+    border-top: 2px solid burlywood;
+    margin: 0;
+}
+
+@font-face {
+    font-family: MontSerrat;
+    src: url('/Font/Montserrat/Montserrat-VariableFont_wght.ttf');
+}
+
+:root {
+    --background-color: rgb(204, 193, 175);
+    --button-background: burlywood;
+}
+
+.NavBar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+}
+
+.NavBar li {
+    float: right;
+}
+
+.NavBar li a {
+    display: block;
+    color: burlywood;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: MontSerrat;
+}
+
+.NavBar a:hover {
+    background-color: #111;
+}
+
+input[type=text],
+input[type=password],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    resize: vertical;
+    background-color: var(--background-color);
+}
+
+input[type=text]:focus,
+input[type=password]:focus {
+    background-color: lightblue;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+input[type=submit] {
+    background-color: var(--button-background);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+input[type=submit]:hover {
+    background-color: grey;
+}
+
+.container {
+    border-radius: 5px;
+    background-color: white;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.ErrorMessage {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+    position: absolute;
+    top: 0;
+}
+
+.Button button {
+    background-color: var(--button-background);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.Button button:hover {
+    background-color: grey;
+    color: burlywood;
+}
