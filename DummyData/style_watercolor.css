@@ -132,6 +132,15 @@ ul {
     text-align: center;
     font-family: MontSerrat;
   }
+
+
+  .watercolor-title{
+    color: darkolivegreen;
+    font-family: MontSerrat;
+    font-size: 32px;
+  }
+
+
   
   .art-medium {
     width: 200px;
@@ -143,9 +152,10 @@ ul {
   .art-medium img {
     width: 100%;
     height: auto;
+    border-radius: 8px;
   }
   
-  .see-more {
+  .view-artist {
     display: block;
     margin: 10px auto;
     padding: 10px;
@@ -162,11 +172,6 @@ ul {
     color: darkgoldenrod;
   }
   
-  
-  .medium-board p,h2{
-    text-align: center;
-    color: darkgoldenrod;
-  }
   
   .art-medium img {
     width: 100%;

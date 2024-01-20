@@ -1,27 +1,25 @@
-var slideshows = document.querySelectorAll('[data-component="slideshow"]');
+let slideIndex = 1;
+showDivs(slideIndex);
 
-// Define the time interval outside of the function
-var time = 5000;
+function plusDivs(n) {
+    showDivs(slideIndex += n);
+}
 
-// Apply to all slideshows that you define with the markup wrote
-slideshows.forEach(initSlideShow);
+function showDivs(n) {
+    let i;
+    let boxes = document.getElementsByClassName("box");
 
-function initSlideShow(slideshow) {
-  var slides = document.querySelectorAll(`#${slideshow.id} [role="list"] .slide`); // Get an array of slides
-  var index = 0;
+    if (n > boxes.length) {
+        slideIndex = 1;
+    }
 
-  slides[index].classList.add('active');  // Add the 'active' class to the first slide
+    if (n < 1) {
+        slideIndex = boxes.length;
+    }
 
-  // Set the interval to advance to the next slide
-  setInterval(() => {
-    slides[index].classList.remove('active'); // Remove the 'active' class from the current slide
+    for (i = 0; i < boxes.length; i++) {
+        boxes[i].classList.remove("active");
+    }
 
-    // Go over each slide incrementing the index
-    index++;
-
-    // If you go over all slides, restart the index to show the first slide and start again
-    if (index === slides.length) index = 0;
-
-    slides[index].classList.add('active'); // Add the 'active' class to the next slide
-  }, time);
+    boxes[slideIndex - 1].classList.add("active");
 }
