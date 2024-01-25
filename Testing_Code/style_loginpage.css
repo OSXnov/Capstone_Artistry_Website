@@ -151,7 +151,7 @@ section .signin .content .form .inputBox i
   color: goldenrod;
   font-weight: 600;
 }
-.signin .content .form .inputBox input[type="submit"]
+.signin .content .form .inputBox button[type="button"]
 {
   padding: 10px;
   background: goldenrod;
@@ -161,7 +161,7 @@ section .signin .content .form .inputBox i
   letter-spacing: 0.05em;
   cursor: pointer;
 }
-input[type="submit"]:active
+input[type="button"]:active
 {
   opacity: 0.6;
 }
