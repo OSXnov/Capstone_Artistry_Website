@@ -6,6 +6,17 @@
   border-top: 2px solid burlywood;
   margin: 0;
 }
+ 
+@font-face {
+  font-family: MontSerrat;
+  src: url('/Font/Montserrat/Montserrat-VariableFont_wght.ttf');
+}
+
+:root {
+  --background-color: rgb(204, 193, 175);
+  --button-background: burlywood;
+}
+
 .NavBar ul {
   list-style-type: none;
   margin: 0;
