@@ -1,5 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
-
+body {
+  font-family: MontSerrat;
+  margin: 0;
+  padding: 0; 
+}
 
 .Divider hr {
   border: none;
@@ -39,140 +42,139 @@
 }
 
 .NavBar a:hover {
-  background-color: rgb(208, 200, 193);
-}
-@font-face {
-  font-family: MontSerrat;
-  src: url('/Font/Montserrat/Montserrat-VariableFont_wght.ttf');
+  background-color: #111;
 }
 
-
-*
-{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Quicksand', 'MontSerrat';
-}
-
-section 
-{
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2px;
-  flex-wrap: wrap;
-  overflow: hidden;
-}
-
-section span:hover 
-{
-  background: grey;
-  transition: 0s;
-}
-
-section .signin
-{
-  position: absolute;
-  width: 400px;
-  background: lightslategrey;
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
-  border-radius: 4px;
-  
-}
-section .signin .content 
-{
-  position: relative;
+input[type=text],
+input[type=password],
+select,
+textarea {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 40px;
-}
-section .signin .content h2 
-{
-  font-size: 2em;
-  color: goldenrod;
-  text-transform: uppercase;
-}
-section .signin .content .form 
-{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-}
-section .signin .content .form .inputBox
-{
-  position: relative;
-  width: 100%;
-}
-section .signin .content .form .inputBox input 
-{
-  position: relative;
-  width: 100%;
-  background: wheat;
+  padding: 12px;
+  margin-bottom: 10px;
+  color: black;
   border: none;
-  outline: none;
-  padding: 25px 10px 7.5px;
   border-radius: 4px;
-  color: black;
-  font-weight: 500;
-  font-size: 1em;
+  resize: vertical;
+  background-color: var(--background-color);
 }
-section .signin .content .form .inputBox i 
-{
-  position: absolute;
-  left: 0;
-  padding: 15px 10px;
-  font-style: normal;
-  color: black;
-  transition: 0.5s;
-  pointer-events: none;
+
+input[type=text]:focus,
+input[type=password]:focus {
+  background-color: lightblue;
 }
-.signin .content .form .inputBox input:focus ~ i,
-.signin .content .form .inputBox input:valid ~ i
-{
-  transform: translateY(-7.5px);
-  font-size: 0.8em;
-  color: black;
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
 }
-.signin .content .form .links 
-{
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-.signin .content .form .links a 
-{
-  color: #fff;
-  text-decoration: none;
-}
-.signin .content .form .links a:nth-child(2)
-{
-  color: goldenrod;
-  font-weight: 600;
-}
-.signin .content .form .inputBox button[type="button"]
-{
-  padding: 10px;
-  background: goldenrod;
-  color: black;
-  font-weight: 600;
-  font-size: 1.35em;
-  letter-spacing: 0.05em;
+
+input[type=submit] {
+  background-color: var(--button-background);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
+  width: 100%;
 }
-input[type="button"]:active
-{
-  opacity: 0.6;
+
+input[type=submit]:hover {
+  background-color: grey;
 }
+
+.container {
+  border-radius: 5px;
+  background-color: white;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.container {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.container::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+* Sign-in Form styles */
+
+.signInForm {
+  font-family: MontSerrat;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.signInForm label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+.signInForm input[type=text],
+.signInForm input[type=password] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  color: black;
+  border: none;
+  border-radius: 4px;
+  resize: vertical;
+  background-color: var(--background-color);
+}
+
+.signInForm input[type=text]:focus,
+.signInForm input[type=password]:focus {
+  background-color: lightblue;
+}
+
+.signInForm input[type=submit] {
+  background-color: var(--button-background);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.signInForm input[type=submit]:hover {
+  background-color: grey;
+}
+/* Adjust the styles for password input to match the text input */
+.signInForm input[type=password] {
+  background-color: var(--background-color);
+}
+
+/* Adjust the styles for password input to match the text input */
+input[type=password] {
+  background-color: var(--background-color);
+}
+
+.Button button {
+  background-color: var(--button-background);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.Button button:hover {
+  background-color: grey;
+  color: burlywood;
+}
+
+/* Adjust the styles for password input to match the text input */
+input[type=password] {
+  background-color: var(--background-color);
+}
+
