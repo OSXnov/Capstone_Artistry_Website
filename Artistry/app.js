@@ -1,9 +1,9 @@
 const express = require('express');
-const Artist = require('./artist');
+const Artist = require('./Artist');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const ejs = require('ejs');
+
 
 const app = express();
 const port = 5500;
@@ -79,7 +79,7 @@ app.post('/login', (req, res) => {
     }
   });
 });
-
+const userData = results[0];
 app.get('/profile/:username', (req, res) => {
   const username = req.params.username;
 
@@ -94,13 +94,13 @@ app.get('/profile/:username', (req, res) => {
         const userData = results[0];
 
         // Send the user profile page HTML file
-        res.sendFile(path.join(__dirname, '..', 'Artistry', 'userprofilepage.html'), {
-          user: {
+        res.render('UserProfilePage.html', { 
+          users: {
             firstName: userData.firstName,
             lastName: userData.lastName,
-            // ... other properties
+
+            // Add other properties based on your database schema
           },
-          loggedIn: true, // Set to true if the user is logged in
         });
       } else {
         res.status(404).send('User not found');
