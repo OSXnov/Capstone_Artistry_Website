@@ -1,12 +1,15 @@
 const express = require('express');
+const Artist = require('./artist');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const ejs = require('ejs');
 
 const app = express();
 const port = 5500;
 
 app.use(cors()); 
+app.use(express.static('public'));
 
 // MYSQL connection
 const connection = mysql.createConnection({
@@ -76,6 +79,37 @@ app.post('/login', (req, res) => {
     }
   });
 });
+
+app.get('/profile/:username', (req, res) => {
+  const username = req.params.username;
+
+  // Fetch user data from the database
+  const query = 'SELECT * FROM users WHERE username = ?';
+  connection.query(query, [username], (err, results) => {
+    if (err) {
+      console.error('Error fetching user data:', err);
+      res.status(500).send('Internal Server Error');
+    } else {
+      if (results.length > 0) {
+        const userData = results[0];
+
+        // Send the user profile page HTML file
+        res.sendFile(path.join(__dirname, '..', 'Artistry', 'userprofilepage.html'), {
+          user: {
+            firstName: userData.firstName,
+            lastName: userData.lastName,
+            // ... other properties
+          },
+          loggedIn: true, // Set to true if the user is logged in
+        });
+      } else {
+        res.status(404).send('User not found');
+      }
+    }
+  });
+});
+
+
 
 // Start the server
 app.listen(port, () => {

@@ -1,3 +1,5 @@
+<!-- public/userprofilepage.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,28 +23,49 @@
 
     <div class="Divider">
         <hr>
-    </div> <!-- horizontal line that divides -->
+    </div>
 
     <div class="Left-Side">
         <ul>
-            <li> <div class="profile-picture-container"> <img src="/Images/user_test.png" alt="Profile Picture"></div>
+            <li>
+                <div class="profile-picture-container"> 
+                    <img src="<%= user.profilePicture %>" alt="Profile Picture">
+                </div>
                 <section class="profile">
                     <div class="header">
-                      <h1 id="userFullName"></h1>
+                        <h1 id="userFullName"><%= user.firstName %> <%= user.lastName %></h1>
                     </div>
-            <li><div class="about-me">      
-                <h2>About Me</h2>
-                <p id="userAboutMe"></p>
-               </div>
+                    <li>
+                        <div class="about-me">      
+                            <h2>About Me</h2>
+                            <p id="userAboutMe"><%= user.description %></p>
+                        </div>
+                    </li>
+                </section>
             </li>
         </ul>
     </div>
 
     <div class="Right-Side">
         <ul>
-            <li><div class="image-userprofile"> <h2> Portfolio</h2><p> Here's my work</p></div></li>
+            <li>
+                <div class="image-userprofile"> 
+                    <h2> Portfolio</h2>
+                    <p> Here's my work</p>
+                    <!-- Add code to display user portfolio images as needed -->
+                </div>
+            </li>
         </ul>
     </div>
+
+    <!-- Display login information -->
+    <% if (loggedIn) { %>
+        <p>Welcome, <%= user.userName %>!</p>
+        <!-- Add additional content for logged-in users -->
+    <% } else { %>
+        <p>Please log in to access your profile.</p>
+        <!-- Add login form or link here -->
+    <% } %>
 
 </body>
 </html>
