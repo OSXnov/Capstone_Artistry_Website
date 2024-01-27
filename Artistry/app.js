@@ -10,6 +10,8 @@ const port = 5500;
 
 app.use(cors()); 
 app.use(express.static('public'));
+app.use(express.json()); // Add this line to parse JSON data
+
 
 // MYSQL connection
 const connection = mysql.createConnection({
@@ -41,12 +43,14 @@ app.use('/Apps', (req, res, next) => {
  
 // Handle form submission (from the second application)
 app.post('/register', (req, res) => {
-  const { fname, lname, age, uname, pwd, email } = req.body;
+  console.log('Request body:', req.body);
+  const { first_name, last_name, user_name, email, password, age } = req.body;
+
+  const artist = new Artist(first_name, last_name, user_name, email, password, age);
 
   // Insert data into the database
-  const query =
-    'INSERT INTO users (first_name, last_name, age, username, password, email) VALUES (?, ?, ?, ?, ?, ?)';
-  connection.query(query, [fname, lname, age, uname, pwd, email], (err, results) => {
+  const query = 'INSERT INTO users (first_name, last_name, age, email, username, password) VALUES (?, ?, ?, ?, ?, ?)';
+  connection.query(query, [artist.firstname, artist.lastname, artist.age, artist.email, artist.username, artist.password], (err, results) => {
     if (err) {
       console.error('Error inserting data:', err);
       res.status(500).send('Internal Server Error');
@@ -81,35 +85,6 @@ app.post('/login', (req, res) => {
 });
 
 
-// const userData = results[0];
-// app.get('/profile/:username', (req, res) => {
-//   const username = req.params.username;
-
-//   // Fetch user data from the database
-//   const query = 'SELECT * FROM users WHERE username = ?';
-//   connection.query(query, [username], (err, results) => {
-//     if (err) {
-//       console.error('Error fetching user data:', err);
-//       res.status(500).send('Internal Server Error');
-//     } else {
-//       if (results.length > 0) {
-//         const userData = results[0];
-
-//         // Send the user profile page HTML file
-//         res.render('UserProfilePage.html', { 
-//           users: {
-//             firstName: userData.firstName,
-//             lastName: userData.lastName,
-
-//             // Add other properties based on your database schema
-//           },
-//         });
-//       } else {
-//         res.status(404).send('User not found');
-//       }
-//     }
-//   });
-// });
 
 
 

@@ -2,14 +2,21 @@ function submitForm() {
     const form = document.getElementById("registrationForm");
     const formData = new FormData(form);
 
-    // Convert FormData to URLSearchParams
-    const urlSearchParams = new URLSearchParams(formData);
- 
+    // Convert FormData to JSON object
+    const artistData = {
+        first_name: formData.get('fname'),
+        last_name: formData.get('lname'),
+        user_name: formData.get('uname'),
+        email: formData.get('email'),
+        password: formData.get('pwd'),
+        age: formData.get('age')
+    };
+
     fetch('http://localhost:5500/register', {
         method: 'POST',
-        body: urlSearchParams,
+        body: JSON.stringify(artistData),
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
         },
     })
     .then(response => {
@@ -20,19 +27,13 @@ function submitForm() {
     })
     .then(data => {
         console.log(data);
-
-        // Check if the response indicates successful registration
         if (data === 'User registered successfully') {
-            // Redirect to another HTML page
             window.location.href = 'another_page.html';
         } else {
-            // Handle other cases as needed
-            // For example, display an error message
             console.error('Registration failed:', data);
         }
-    }) 
+    })
     .catch(error => {
         console.error('Error:', error);
-        // Handle errors here
     });
 }

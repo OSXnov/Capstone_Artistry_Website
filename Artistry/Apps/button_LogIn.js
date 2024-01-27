@@ -28,6 +28,7 @@ function LogInForm() {
 
         // Check if login was successful
         if (data === 'Login successful') {
+            
             // Redirect to another HTML file upon successful login
             window.location.href = '/Artistry/UserProfilePage.html';
         } else {
