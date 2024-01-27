@@ -4,7 +4,7 @@ function submitForm() {
 
     // Convert FormData to URLSearchParams
     const urlSearchParams = new URLSearchParams(formData);
-
+ 
     fetch('http://localhost:5500/register', {
         method: 'POST',
         body: urlSearchParams,
@@ -19,7 +19,17 @@ function submitForm() {
         return response.text();
     })
     .then(data => {
-        console.log(data); // Display success message or handle as needed
+        console.log(data);
+
+        // Check if the response indicates successful registration
+        if (data === 'User registered successfully') {
+            // Redirect to another HTML page
+            window.location.href = 'another_page.html';
+        } else {
+            // Handle other cases as needed
+            // For example, display an error message
+            console.error('Registration failed:', data);
+        }
     }) 
     .catch(error => {
         console.error('Error:', error);

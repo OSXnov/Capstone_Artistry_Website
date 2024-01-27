@@ -38,7 +38,7 @@ app.use('/Apps', (req, res, next) => {
   }
   express.static(path.join(__dirname, 'Apps'))(req, res, next);
 });
-
+ 
 // Handle form submission (from the second application)
 app.post('/register', (req, res) => {
   const { fname, lname, age, uname, pwd, email } = req.body;
@@ -79,35 +79,37 @@ app.post('/login', (req, res) => {
     }
   });
 });
-const userData = results[0];
-app.get('/profile/:username', (req, res) => {
-  const username = req.params.username;
 
-  // Fetch user data from the database
-  const query = 'SELECT * FROM users WHERE username = ?';
-  connection.query(query, [username], (err, results) => {
-    if (err) {
-      console.error('Error fetching user data:', err);
-      res.status(500).send('Internal Server Error');
-    } else {
-      if (results.length > 0) {
-        const userData = results[0];
 
-        // Send the user profile page HTML file
-        res.render('UserProfilePage.html', { 
-          users: {
-            firstName: userData.firstName,
-            lastName: userData.lastName,
+// const userData = results[0];
+// app.get('/profile/:username', (req, res) => {
+//   const username = req.params.username;
 
-            // Add other properties based on your database schema
-          },
-        });
-      } else {
-        res.status(404).send('User not found');
-      }
-    }
-  });
-});
+//   // Fetch user data from the database
+//   const query = 'SELECT * FROM users WHERE username = ?';
+//   connection.query(query, [username], (err, results) => {
+//     if (err) {
+//       console.error('Error fetching user data:', err);
+//       res.status(500).send('Internal Server Error');
+//     } else {
+//       if (results.length > 0) {
+//         const userData = results[0];
+
+//         // Send the user profile page HTML file
+//         res.render('UserProfilePage.html', { 
+//           users: {
+//             firstName: userData.firstName,
+//             lastName: userData.lastName,
+
+//             // Add other properties based on your database schema
+//           },
+//         });
+//       } else {
+//         res.status(404).send('User not found');
+//       }
+//     }
+//   });
+// });
 
 
 
