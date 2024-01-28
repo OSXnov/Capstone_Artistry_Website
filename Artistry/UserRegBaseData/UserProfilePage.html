@@ -13,9 +13,9 @@
         <nav>
             <div class="NavBar">
                 <ul>
-                    <li><a href="HomePage.html">Home</a></li>
+                    <li><a href="/Artistry/HomePage.html">Home</a></li>
                     <li><a href="MediumPage.html">Medium</a></li>
-                    <li><a href="ProfilePage.html">My Profile</a></li>
+                    <li><a href="UserProfilePage.html">My Profile</a></li>
                 </ul>
             </div>
         </nav>
@@ -29,7 +29,7 @@
         <ul>
             <li>
                 <div class="profile-picture-container"> 
-                    <img src="<%= user.profilePicture %>" alt="Profile Picture">
+                    <img src="/DummyDB/user_data/user_imgs/profilepic" alt="Profile Picture">
                 </div>
                 <section class="profile">
                     <div class="header">
@@ -58,14 +58,6 @@
         </ul>
     </div>
 
-    <!-- Display login information -->
-    <% if (loggedIn) { %>
-        <p>Welcome, <%= user.userName %>!</p>
-        <!-- Add additional content for logged-in users -->
-    <% } else { %>
-        <p>Please log in to access your profile.</p>
-        <!-- Add login form or link here -->
-    <% } %>
 
 </body>
 </html>

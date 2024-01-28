@@ -84,6 +84,26 @@ app.post('/login', (req, res) => {
   });
 });
 
+// Define a route to handle folder creation
+app.get('/createFolder', (req, res) => {
+  const { username } = req.query;
+
+  // Define the path where the folder will be created
+  const folderPath = `/DummyDB/user_data/${username}`;
+
+  // Use Node.js's built-in fs module to create the folder
+  const fs = require('fs');
+  fs.mkdir(folderPath, { recursive: true }, (err) => {
+      if (err) {
+          console.error('Error creating folder:', err);
+          res.status(500).send('Error creating folder');
+      } else {
+          console.log('Folder created successfully');
+          res.status(200).send('Folder created successfully');
+      }
+  });
+});
+
 
 
 
