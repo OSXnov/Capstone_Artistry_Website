@@ -30,7 +30,7 @@ function LogInForm() {
         if (data === 'Login successful') {
             
             // Redirect to another HTML file upon successful login
-            window.location.href = '/Artistry/UserProfilePage.html';
+            window.location.href = '';
         } else {
             // Handle other cases if needed
         }
