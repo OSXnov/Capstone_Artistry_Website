@@ -1,7 +1,6 @@
 function submitForm() {
     const form = document.getElementById("registrationForm");
     const formData = new FormData(form);
-   
 
     // Convert FormData to JSON object
     const artistData = {
@@ -28,9 +27,9 @@ function submitForm() {
     }) 
     .then(data => {
         console.log(data);
-        if (data === 'User registered successfully') {
-            window.location.href = `/Artistry/DummyDB/user_data/${artistData.user_name}/UserProfilePage.html`;
-            
+        if (data === 'User registered and Files copied successfully') {
+            console.log('Redirecting to UserProfilePage.html');
+            window.location.href = `./DummyDB/user_data/${artistData.user_name}/UserProfilePage.html`;
         } else {
             console.error('Registration failed:', data);
         }

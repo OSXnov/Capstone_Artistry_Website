@@ -4,7 +4,7 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs-extra'); // Import the fs module
-
+const path = require('path');
 
 const app = express();
 const port = 5500;
@@ -35,13 +35,9 @@ connection.connect((err) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Serve JavaScript files from the 'Apps' directory with correct MIME type
-app.use('/Apps', (req, res, next) => {
-  if (req.url.endsWith('.js')) {
-    res.type('application/javascript');
-  }
-  express.static(path.join(__dirname, 'Apps'))(req, res, next);
-});
- 
+app.use('/Apps', express.static(path.join(__dirname, 'Apps')));
+
+// Handle user registration and file operations
 // Handle user registration and file operations
 app.post('/register', (req, res) => {
   console.log('Request body:', req.body);
@@ -56,7 +52,7 @@ app.post('/register', (req, res) => {
       console.error('Error inserting data:', err);
       res.status(500).send('Internal Server Error');
     } else {
-      console.log('User registered successfully');
+      console.log('');
 
       // Task 1: Locate a folder at a specific path
       const sourceFolderPath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\UserRegBaseData\\';
@@ -77,8 +73,29 @@ app.post('/register', (req, res) => {
             res.status(500).send('Error copying files');
             return;
           }
-          console.log('Files copied successfully');
-          res.status(200).send('Files copied successfully');
+          console.log('');
+
+                  // Read UserProfilePage.html file
+        fs.readFile(path.join(destinationFolderPath, 'UserProfilePage.html'), 'utf8', (err, data) => {
+          if (err) {
+              console.error('Error reading file:', err);
+              return res.status(500).send('Error reading file');
+          }
+
+          // Replace placeholder values with user data
+          const userProfileData = data.replace('{User.User_name}', artist.username);
+          // You can add more replacements for other user data here
+
+          // Save the modified file
+          fs.writeFile(path.join(destinationFolderPath, 'UserProfilePage.html'), userProfileData, (err) => {
+              if (err) {
+                  console.error('Error saving file:', err);
+                  return res.status(500).send('Error saving file');
+              }
+              console.log('User registered and Files copied successfully');
+              res.status(200).send('User registered and Files copied successfully');
+          });
+        });
         });
       });
     }
