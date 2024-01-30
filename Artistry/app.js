@@ -101,32 +101,41 @@ app.post('/register', (req, res) => {
     }
   });
 });
-
-// Handle login (from the first application)
 app.post('/login', (req, res) => {
-  const { uname, pwd } = req.body;
- //console.log('Received login request:', { uname, pwd });
+  console.log('Request body:', req.body);
+  
+  // Parse the request body JSON string
+  const bodyData = JSON.parse(Object.keys(req.body)[0]);
 
-  // Validate login (use hashed passwords in a real application)
-  const query = 'SELECT * FROM users WHERE username = ? AND password = ?';
-  connection.query(query, [uname, pwd], (err, results) => {
+  const { user_name, password } = bodyData;
+
+  // Validate if the directory exists for the provided username
+  const userDirectoryPath = path.join(__dirname, 'DummyDB', 'user_data', user_name);
+  fs.access(userDirectoryPath, fs.constants.F_OK, (err) => {
     if (err) {
-      console.error('Error validating login:', err);
-      res.status(500).send('Internal Server Error');
-    } else {
-      if (results.length > 0) {
-        console.log('Login successful');
-        res.status(200).send('Login successful');
-      } else {
-        console.log('Invalid username or password');
-        res.status(401).send('Invalid username or password');
-      }
+      console.error('Error accessing directory:', err);
+      return res.status(401).send('Invalid username');
     }
+
+    // If the directory exists, validate the password against the database
+    const query = 'SELECT * FROM users WHERE username = ? AND password = ?';
+    connection.query(query, [user_name, password], (err, results) => {
+      if (err) {
+        console.error('Error validating login:', err);
+        return res.status(500).send('Internal Server Error');
+      } else {
+        console.log('Query results:', results); // Add this line to check query results
+        if (results.length > 0) {
+          console.log('Login successful');
+          return res.status(200).send('Login successful');
+        } else {
+          console.log('Invalid username or password');
+          return res.status(401).send('Invalid username or password');
+        }
+      }
+    });
   });
 });
-
-
-
 
 
 
