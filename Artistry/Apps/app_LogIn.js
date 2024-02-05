@@ -54,6 +54,27 @@ app.post('/login', (req, res) => {
   });
 });
 
+// // Sample route to render the dynamic user profile
+// app.get('/profile/:username', (req, res) => {
+//   const username = req.params.username;
+
+//   connection.query('SELECT * FROM users WHERE username = ?', [username], (err, results) => {
+//     if (err) throw err;
+
+//     if (results.length > 0) {
+//       const user = results[0];
+//       res.render('profile', {
+//         userFullName: `${user.firstName} ${user.lastName}`,
+//         userAboutMe: user.aboutMe,
+//       });
+//     } else {
+//       res.send('User not found');
+//     }
+//   });
+// });
+
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

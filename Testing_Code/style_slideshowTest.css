@@ -1,0 +1,24 @@
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+  }
+  
+  .slide {
+    display: none;
+    position: absolute;
+    width: 100%;
+  }
+  
+  .slide img {
+    width: 100%;
+    height: auto;
+  }
+
+  [data-component="slideshow"] .slide {
+    display: none;
+  }
+  
+  [data-component="slideshow"] .slide.active {
+    display: block;
+  }

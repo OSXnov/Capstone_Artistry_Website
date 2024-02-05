@@ -1,7 +1,7 @@
 body {
   font-family: MontSerrat;
   margin: 0;
-  padding: 0;
+  padding: 0; 
 }
 
 .Divider hr {
@@ -9,7 +9,7 @@ body {
   border-top: 2px solid burlywood;
   margin: 0;
 }
-
+ 
 @font-face {
   font-family: MontSerrat;
   src: url('/Font/Montserrat/Montserrat-VariableFont_wght.ttf');

@@ -26,10 +26,14 @@
     <div class="Left-Side">
         <ul>
             <li> <div class="profile-picture-container"> <img src="/Images/user_test.png" alt="Profile Picture"></div>
+                <section class="profile">
+                    <div class="header">
+                      <h1 id="userFullName"></h1>
+                    </div>
             <li><div class="about-me">      
                 <h2>About Me</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in quam et ante aliquam tincidunt. Sed sit amet dolor vitae orci euismod facilisis. Vestibulum vel turpis eget ligula euismod dignissim. Suspendisse potenti. Duis efficitur malesuada purus, a vehicula arcu ultricies in. Suspendisse potenti.</p>
-                </div>
+                <p id="userAboutMe"></p>
+               </div>
             </li>
         </ul>
     </div>
@@ -39,6 +43,13 @@
             <li><div class="image-userprofile"> <h2> Portfolio</h2><p> Here's my work</p></div></li>
         </ul>
     </div>
+
+    // Replace placeholder values with user data
+    userProfileData = userProfileData.replace('{User.email}', artist.email);
+    userProfileData = userProfileData.replace('{user.first_name}',  artist.first_name);
+    userProfileData = userProfileData.replace('{User.last_name}', artist.last_name);
+    userProfileData = userProfileData.replace('{User.User_name}',  artist.username);
+
 
 </body>
 </html>
