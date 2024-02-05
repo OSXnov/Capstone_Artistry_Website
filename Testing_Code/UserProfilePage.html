@@ -29,6 +29,11 @@
                 <section class="profile">
                     <div class="header">
                       <h1 id="userFullName"></h1>
+                      <p>
+                       {User.first_name} {User.last_name}
+                       {User.User_name}
+                       {User.email}
+                      </p> 
                     </div>
             <li><div class="about-me">      
                 <h2>About Me</h2>
@@ -44,11 +49,7 @@
         </ul>
     </div>
 
-    // Replace placeholder values with user data
-    userProfileData = userProfileData.replace('{User.email}', artist.email);
-    userProfileData = userProfileData.replace('{user.first_name}',  artist.first_name);
-    userProfileData = userProfileData.replace('{User.last_name}', artist.last_name);
-    userProfileData = userProfileData.replace('{User.User_name}',  artist.username);
+    
 
 
 </body>
