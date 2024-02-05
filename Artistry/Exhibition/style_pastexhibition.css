@@ -145,7 +145,7 @@ ul {
     height: auto;
   }
   
-  .see-more {
+  .see-exhibit {
     display: block;
     margin: 10px auto;
     padding: 10px;
@@ -163,7 +163,7 @@ ul {
   }
   
   
-  .medium-board p,h2{
+  .exhibition-board p,h2{
     text-align: center;
     color: darkgoldenrod;
   }
