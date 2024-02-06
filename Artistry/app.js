@@ -207,6 +207,22 @@ app.post('/submitExhibition', (req, res) => {
   });
 });
 
+
+
+app.post('/uploadFile', (req, res) => {
+  const file = req.files.filename;
+  const fileName = file.name;
+  file.mv('./art_exhibit/' + fileName, (err) => {
+      if (err) {
+          console.error('Error uploading file:', err);
+          res.status(500).send('Error uploading file');
+      } else {
+          console.log('File uploaded successfully');
+          res.status(200).send('File uploaded successfully');
+      }
+  });
+});
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
