@@ -38,7 +38,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/Apps', express.static(path.join(__dirname, 'Apps')));
 
 // Handle user registration and file operations
-// Handle user registration and file operations
 app.post('/register', (req, res) => {
   console.log('Request body:', req.body);
   const { first_name, last_name, user_name, email, password, age } = req.body;
@@ -101,6 +100,9 @@ app.post('/register', (req, res) => {
     }
   });
 });
+
+
+
 app.post('/login', (req, res) => {
   console.log('Request body:', req.body);
   
@@ -136,6 +138,9 @@ app.post('/login', (req, res) => {
     });
   });
 });
+
+
+
 
 
 
