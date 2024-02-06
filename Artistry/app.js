@@ -54,8 +54,8 @@ app.post('/register', (req, res) => {
       console.log('');
 
       // Task 1: Locate a folder at a specific path
-      const sourceFolderPath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\UserRegBaseData\\';
-      const destinationFolderPath = `C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\DummyDB\\user_data\\${user_name}`;
+      const sourceFolderPath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\BaseData\\UserBaseData\\';
+      const destinationFolderPath = `C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\DummyDB\\Users\\${user_name}`;
 
       // Create user directory
       fs.mkdir(destinationFolderPath, { recursive: true }, (err) => {
