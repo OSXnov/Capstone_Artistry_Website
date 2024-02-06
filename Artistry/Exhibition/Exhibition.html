@@ -29,19 +29,16 @@
         <ul>
             <li>
                 <div class="profile-picture-container"> 
-                    <img src="/DummyDB/user_data/user_imgs/profilepic" alt="Profile Picture">
+                    <img src="" alt="Profile Picture">
                 </div>
                 <section class="profile">
                     <div class="header">
                        <p>
-
+                        {Users.user_name}
+                        {Users.email}
                        </p>
                     </div>
                     <li>
-                        <div class="about-me">      
-                            <h2>About Me</h2>
-                            <p id="userAboutMe"></p>
-                        </div>
                     </li>
                 </section>
             </li>
@@ -51,10 +48,10 @@
     <div class="Right-Side">
         <ul>
             <li>
-                <div class="image-userprofile"> 
-                    <h2>Exhibition</h2>
-                    <p> Here's my work</p>
-                    <!-- Add code to display user portfolio images as needed -->
+                <div class="exhibition"> 
+                    <h2>Theme: </h2>
+                    <p>{}</p>
+                    <!-- Add code to display user exhibition art as needed -->
                 </div>
             </li>
         </ul>
