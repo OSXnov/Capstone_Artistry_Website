@@ -38,6 +38,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Serve JavaScript files from the 'Apps' directory with correct MIME type
 app.use('/Apps', express.static(path.join(__dirname, 'Apps')));
 
+// Serve files from DummyDB directory
+app.use('/Artistry/DummyDB', express.static(path.join(__dirname, 'DummyDB')));
+
 // Handle user registration and file operations
 app.post('/register', (req, res) => {
   console.log('Request body:', req.body);
@@ -186,9 +189,7 @@ app.post('/submitExhibition', (req, res) => {
                 fs.copy(sourceFolderPath, destinationFolderPath)
                   .then(() => {
                     console.log('Files copied successfully');
-
-                    // Redirect user to FileUpload.html
-                    res.redirect(`/Artistry/DummyDB/Exhibition/${username}/FileUpload.html`);
+                    res.status(200).send('Files copied successfully');
                   })
                   .catch((err) => {
                     console.error('Error copying files:', err);

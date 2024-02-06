@@ -25,8 +25,13 @@ function submitExhibitionForm() {
         return response.text();
     }) 
     .then(data => {
-        console.log(data);
-        // Handle response as needed
+        console.log(data)
+        if(data == 'Files copied successfully'){
+            console.log('Redirecting to Exhibition Page')
+            window.location.href = `/Artistry/DummyDB/Exhibitions/${exhibitionData.username}/FileUpload.html`;
+        } else{
+            console.error('Redirection Failed', data);
+        }
     })
     .catch(error => {
         console.error('Error:', error);

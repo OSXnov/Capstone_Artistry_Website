@@ -27,9 +27,10 @@ function submitForm() {
     }) 
     .then(data => {
         console.log(data);
-        if (data === 'User registered and Files copied successfully') {
+        if (data == 'User registered and Files copied successfully') {
             console.log('Redirecting to UserProfilePage.html');
-            window.location.href = `./DummyDB/Users/${artistData.user_name}/UserProfilePage.html`;
+            window.location.href = `/Artistry/DummyDB/Users/${artistData.user_name}/UserProfilePage.html`;
+            
         } else {
             console.error('Registration failed:', data);
         }
