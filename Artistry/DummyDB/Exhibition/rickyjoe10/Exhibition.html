@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_exhibition.css">
+</head>
+<body>
+    <header> 
+        <img src="/Images/Artistry_HorizontalLogo.PNG" style="width: 300px; height:100px">
+        <nav>
+            <div class="NavBar">
+                <ul>
+                    <li><a href="/Artistry/HomePage.html">Home</a></li>
+                    <li><a href="MediumPage.html">Medium</a></li>
+                    <li><a href="UserProfilePage.html">My Profile</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="Divider">
+        <hr>
+    </div>
+
+    <div class="Container">
+        <div class="Left-Side">
+            <section class="profile">
+                <div class="header">
+                   <p>User Name: {Users.user_name}</p>
+                   <p>Email: {Users.email}</p>
+                   <p>Topic or Theme</p>
+                   <p>Brief Description</p>
+                </div>
+            </section>
+        </div>
+
+        <div class="Right-Side">
+            <div class="exhibition"> 
+                <h2>Title of Artwork: {Exhibitions.title} </h2>
+
+                <div class="art-exhibit">
+                    <img src="/Images/acrylic_example.jpeg"alt="Art">
+                    <a href="/Images/acrylic_example.jpeg" class="see-art">SEE ART</a>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

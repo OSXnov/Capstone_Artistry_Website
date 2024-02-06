@@ -28,7 +28,7 @@ function submitExhibitionForm() {
         console.log(data)
         if(data == 'Files copied successfully'){
             console.log('Redirecting to Exhibition Page')
-            window.location.href = `/Artistry/DummyDB/Exhibitions/${exhibitionData.username}/FileUpload.html`;
+            window.location.href = `/Artistry/DummyDB/Exhibition/${exhibitionData.username}/FileUpload.html`;
         } else{
             console.error('Redirection Failed', data);
         }

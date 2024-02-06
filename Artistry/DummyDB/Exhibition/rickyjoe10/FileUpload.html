@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Artistry</title>
+        <link rel="stylesheet" type="text/css" href="style_fileupload.css">
+    </head>
+
+    <body>
+        <header>
+            <img src="/Images/Artistry_HorizontalLogo.PNG" style="width: 300px; height:100px">
+            <nav>
+                <div class="NavBar">
+                <ul>
+                    <li><a href="/Artistry/HomePage.html">Home</a></li>
+                    <li><a href="/Artistry/MediumPage.html">Medium</a></li>
+                    <li><a href="UserProfilePage.html">My Profile</a>
+                </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="Divider"> <hr> </div> <!-- horizontal line that divides -->
+
+        <div class="file-upload-container">
+            <input type="file" id="myFile" name="filename">
+            <label for="myFile">Choose File</label>
+            <span id="file-name">No file chosen</span>
+          </div>
+        
+          <script>
+            document.getElementById('myFile').addEventListener('change', function () {
+              var fileName = this.value.split('\\').pop();
+              document.getElementById('file-name').textContent = fileName || "No file chosen";
+            });
+          </script>
+
+
+    </body>
+</html>
