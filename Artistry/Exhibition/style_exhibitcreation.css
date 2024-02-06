@@ -79,3 +79,27 @@ button:hover {
     background-color: grey;
 }
 
+
+
+.briefDesc textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ced4da;
+    box-sizing: border-box;
+    border-radius: 5px;
+    resize: vertical; /* Allows vertical resizing */
+    font-family: MontSerrat;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ced4da;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-family: MontSerrat;
+}

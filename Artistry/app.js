@@ -1,5 +1,6 @@
 const express = require('express');
 const Artist = require('./Artist');
+const Exhibition = require('./Exhibition');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -101,6 +102,40 @@ app.post('/register', (req, res) => {
   });
 });
 
+// A route to handle Exhibition form submission
+app.post('/submitExhibition', (req, res) => {
+  // Extract form data
+  const { uname, pwd, toa, briefDesc, category } = req.body;
+
+  // Validate user credentials (e.g., username and password)
+  // Perform authentication here (omitted for brevity)
+
+  // Instantiate Exhibition object
+  const exhibition = new Exhibition(toa, briefDesc, uname, category);
+
+  // Connect to MySQL and save data to database
+  const connection = mysql.createConnection({
+      host: 'localhost',
+      user: 'root',
+      password: 'STT_ArtistryUserReg_2023',
+      database: 'artistry',
+  });
+
+  connection.connect();
+  
+  const query = 'INSERT INTO exhibition (Title, briefdesc, user_name, category) VALUES (?, ?, ?, ?)';
+  connection.query(query, [exhibition.title, exhibition.briefdesc, exhibition.username, exhibition.category], (error, results, fields) => {
+      if (error) {
+          console.error('Error inserting data:', error);
+          res.status(500).send('Internal Server Error');
+      } else {
+          console.log('Exhibition data inserted successfully');
+          res.status(200).send('Exhibition data inserted successfully');
+      }
+  });
+
+  connection.end();
+});
 
 
 app.post('/login', (req, res) => {

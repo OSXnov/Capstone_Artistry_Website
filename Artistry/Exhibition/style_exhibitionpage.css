@@ -39,7 +39,29 @@ ul {
     src: url(/Font/Montserrat/Montserrat-VariableFont_wght.ttf);
   }
 
-  button {
+
+  .exhibition-intro{
+    text-align: center;
+  }
+
+
+  main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .addExhibition-button,
+  .pastExhibition-button {
+      margin-top: 20px;
+  }
+
+  .addExhibition-button button,
+  .pastExhibition-button button {
+      margin: 0 10px;
+  }
+
+   button {
     font-size: 18px;
     letter-spacing: 2px;
     text-transform: uppercase;

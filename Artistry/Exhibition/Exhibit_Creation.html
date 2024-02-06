@@ -32,11 +32,23 @@
                     <div class="UserName"> 
                         <input type="text" id="uname" name="uname" placeholder="UserName" required>
                     </div>
-                    <div class="TopicOfArt"> 
-                        <input type="text" id="toa" name="toa" placeholder="Topic Of Art" required>
+                    <div class="Password"> 
+                        <input type="password" id="pwd" name="pwd" placeholder="PASSWORD" required>
+                    </div>
+                    <div class="TitleOfArt"> 
+                        <input type="text" id="toa" name="toa" placeholder="Title Of Art" required>
+                    </div>
+                    <div class="ArtTheme">
+                        <select id="category" name="category">
+                            <option value="" selected disabled>Select Category</option>
+                            <option value="watercolor">Watercolor</option>
+                            <option value="oil">Oil</option>
+                            <option value="graffiti">Graffiti</option>
+                            <!-- Add more options as needed -->
+                        </select>
                     </div>
                     <div class="briefDesc"> 
-                        <input type="text" id="briefDesc" name="briefDesc" placeholder="Brief Description" required>
+                        <textarea id="briefDesc" name="briefDesc" placeholder="Brief Description (max 280 characters)" rows="6" maxlength="280" required></textarea>
                     </div>
                     <div class="Button"> 
                         <button type="button" onclick="exhibitForm()">Submit</button>

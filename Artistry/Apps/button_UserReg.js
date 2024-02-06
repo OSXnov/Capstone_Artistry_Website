@@ -2,12 +2,12 @@ function submitForm() {
     const form = document.getElementById("registrationForm");
     const formData = new FormData(form);
 
-    // Convert FormData to JSON object
+    // Convert FormData to JSON object 
     const artistData = {
         first_name: formData.get('fname'),
         last_name: formData.get('lname'),
         user_name: formData.get('uname'),
-        email: formData.get('email'),
+        email: formData.get('email'), 
         password: formData.get('pwd'),
         age: formData.get('age')
     };
@@ -29,7 +29,7 @@ function submitForm() {
         console.log(data);
         if (data === 'User registered and Files copied successfully') {
             console.log('Redirecting to UserProfilePage.html');
-            window.location.href = `./DummyDB/user_data/${artistData.user_name}/UserProfilePage.html`;
+            window.location.href = `./DummyDB/Users/${artistData.user_name}/UserProfilePage.html`;
         } else {
             console.error('Registration failed:', data);
         }
