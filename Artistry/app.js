@@ -125,12 +125,14 @@ app.post('/login', (req, res) => {
       if (err) {
         console.error('Error validating login:', err);
         return res.status(500).send('Internal Server Error');
-      } else {
+      } 
+      else {
         console.log('Query results:', results); // Add this line to check query results
         if (results.length > 0) {
           console.log('Login successful');
           return res.status(200).send('Login successful');
-        } else {
+        } 
+        else {
           console.log('Invalid username or password');
           return res.status(401).send('Invalid username or password');
         }
@@ -143,41 +145,66 @@ app.post('/login', (req, res) => {
 
 
 
-// A route to handle Exhibition form submission
 app.post('/submitExhibition', (req, res) => {
   // Extract form data
-  const { uname, pwd, toa, briefDesc, category } = req.body;
+  const { username, password, Title, briefdesc, category } = req.body;
 
-  // Validate user credentials (e.g., username and password)
-  // Perform authentication here (omitted for brevity)
+  // Authenticate user
+  const artist = new Artist(null, null, username, null, password, null); // Create Artist object with username and password
 
-  // Instantiate Exhibition object
-  const exhibition = new Exhibition(toa, briefDesc, uname, category);
+  // Validate user credentials before proceeding
+  const query = 'SELECT * FROM users WHERE username = ? AND password = ?';
+  connection.query(query, [artist.username, artist.password], (err, results) => {
+    if (err) {
+      console.error('Error validating login:', err);
+      return res.status(500).send('Internal Server Error');
+    } else {
+      console.log('Query results:', results);
+      if (results.length > 0) {
+        console.log('Login successful');
 
-  // Connect to MySQL and save data to database
-  const connection = mysql.createConnection({
-      host: 'localhost',
-      user: 'root',
-      password: 'STT_ArtistryUserReg_2023',
-      database: 'artistry',
-  });
+        // If login is successful, insert exhibition data
+        const exhibit = new Exhibition(Title, briefdesc, username, category);
+        const insertQuery = 'INSERT INTO exhibition (Title, briefdesc, username, category) VALUES (?, ?, ?, ?)';
+        connection.query(insertQuery, [exhibit.Title, exhibit.briefdesc, exhibit.username, exhibit.category], (error, results, fields) => {
+          if (error) {
+            console.error('Error inserting data:', error);
+            res.status(500).send('Internal Server Error');
+          } else {
+            console.log('Exhibition data inserted successfully');
 
-  connection.connect();
-  
-  const query = 'INSERT INTO exhibition (Title, briefdesc, user_name, category) VALUES (?, ?, ?, ?)';
-  connection.query(query, [exhibition.title, exhibition.briefdesc, exhibition.username, exhibition.category], (error, results, fields) => {
-      if (error) {
-          console.error('Error inserting data:', error);
-          res.status(500).send('Internal Server Error');
+            // Create exhibition directory and copy files
+            const sourceFolderPath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\BaseData\\ExhibitionBaseData\\';
+            const destinationFolderPath = `C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\DummyDB\\Exhibition\\${username}`;
+
+            fs.mkdir(destinationFolderPath, { recursive: true }, (err) => {
+              if (err) {
+                console.error('Error creating folder:', err);
+                res.status(500).send('Error creating folder');
+              } else {
+                // Copy files to destination folder
+                fs.copy(sourceFolderPath, destinationFolderPath)
+                  .then(() => {
+                    console.log('Files copied successfully');
+
+                    // Redirect user to FileUpload.html
+                    res.redirect(`/Artistry/DummyDB/Exhibition/${username}/FileUpload.html`);
+                  })
+                  .catch((err) => {
+                    console.error('Error copying files:', err);
+                    res.status(500).send('Error copying files');
+                  });
+              }
+            });
+          }
+        });
       } else {
-          console.log('Exhibition data inserted successfully');
-          res.status(200).send('Exhibition data inserted successfully');
+        console.log('Invalid username or password');
+        return res.status(401).send('Invalid username or password');
       }
+    }
   });
-
-  connection.end();
 });
-
 
 // Start the server
 app.listen(port, () => {

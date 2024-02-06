@@ -4,10 +4,10 @@ function submitExhibitionForm() {
  
     // Convert FormData to JSON object 
     const exhibitionData = {
-        uname: formData.get('uname'),
-        pwd: formData.get('pwd'),
-        toa: formData.get('toa'),
-        briefDesc: formData.get('briefDesc'),
+        username: formData.get('uname'),
+        password: formData.get('pwd'),
+        Title: formData.get('title'),
+        briefdesc: formData.get('briefdesc'),
         category: formData.get('category')
     };
 
