@@ -10,7 +10,7 @@ function submitForm() {
         email: formData.get('email'), 
         password: formData.get('pwd'),
         age: formData.get('age')
-    };
+    }; 
 
     fetch('http://localhost:5500/register', {
         method: 'POST',

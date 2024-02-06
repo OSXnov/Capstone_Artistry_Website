@@ -102,6 +102,47 @@ app.post('/register', (req, res) => {
   });
 });
 
+
+
+app.post('/login', (req, res) => {
+  console.log('Request body:', req.body);
+  
+  // Parse the request body JSON string
+  const {username, password} = req.body;
+  const artist = new Artist(null, null, username, null, password, null);
+
+  // Validate if the directory exists for the provided username
+  const userDirectoryPath = path.join(__dirname, 'DummyDB', 'Users', username);
+  fs.access(userDirectoryPath, fs.constants.F_OK, (err) => {
+    if (err) {
+      console.error('Error accessing directory:', err);
+      return res.status(401).send('Invalid username');
+    }
+
+    // If the directory exists, validate the password against the database
+    const query = 'SELECT * FROM users WHERE username = ? AND password = ?';
+    connection.query(query, [artist.username, artist.password], (err, results) => {
+      if (err) {
+        console.error('Error validating login:', err);
+        return res.status(500).send('Internal Server Error');
+      } else {
+        console.log('Query results:', results); // Add this line to check query results
+        if (results.length > 0) {
+          console.log('Login successful');
+          return res.status(200).send('Login successful');
+        } else {
+          console.log('Invalid username or password');
+          return res.status(401).send('Invalid username or password');
+        }
+      }
+    });
+  });
+});
+
+
+
+
+
 // A route to handle Exhibition form submission
 app.post('/submitExhibition', (req, res) => {
   // Extract form data
@@ -136,47 +177,6 @@ app.post('/submitExhibition', (req, res) => {
 
   connection.end();
 });
-
-
-app.post('/login', (req, res) => {
-  console.log('Request body:', req.body);
-  
-  // Parse the request body JSON string
-  const bodyData = JSON.parse(Object.keys(req.body)[0]);
-
-  const { user_name, password } = bodyData;
-
-  // Validate if the directory exists for the provided username
-  const userDirectoryPath = path.join(__dirname, 'DummyDB', 'user_data', user_name);
-  fs.access(userDirectoryPath, fs.constants.F_OK, (err) => {
-    if (err) {
-      console.error('Error accessing directory:', err);
-      return res.status(401).send('Invalid username');
-    }
-
-    // If the directory exists, validate the password against the database
-    const query = 'SELECT * FROM users WHERE username = ? AND password = ?';
-    connection.query(query, [user_name, password], (err, results) => {
-      if (err) {
-        console.error('Error validating login:', err);
-        return res.status(500).send('Internal Server Error');
-      } else {
-        console.log('Query results:', results); // Add this line to check query results
-        if (results.length > 0) {
-          console.log('Login successful');
-          return res.status(200).send('Login successful');
-        } else {
-          console.log('Invalid username or password');
-          return res.status(401).send('Invalid username or password');
-        }
-      }
-    });
-  });
-});
-
-
-
-
 
 
 // Start the server

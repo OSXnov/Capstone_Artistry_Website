@@ -1,8 +1,8 @@
 class Exhibitions {
-    constructor(Title,briefdesc,user_name,category) {    
+    constructor(Title,briefdesc,username,category) {    
         this.Title = Title;
         this.briefdesc = briefdesc;
-        this.username = user_name;
+        this.username = username;
         this.category = category;
 
     }

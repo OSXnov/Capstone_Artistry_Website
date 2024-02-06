@@ -1,7 +1,7 @@
 function submitExhibitionForm() {
     const form = document.getElementById("exhibitionForm");
     const formData = new FormData(form);
-
+ 
     // Convert FormData to JSON object 
     const exhibitionData = {
         uname: formData.get('uname'),

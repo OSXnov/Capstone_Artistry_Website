@@ -8,12 +8,9 @@ function LogInForm() {
     
     // Log form data for debugging
     const artistData = {
-        first_name: formData.get('fname'),
-        last_name: formData.get('lname'),
-        user_name: formData.get('uname'),
-        email: formData.get('email'),
+        username: formData.get('uname'),
         password: formData.get('pwd'),
-        age: formData.get('age')
+
     };
 
 
@@ -22,7 +19,7 @@ function LogInForm() {
         method: 'POST',
         body: JSON.stringify(artistData),
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json',
         },
     })
     .then(response => {
@@ -36,8 +33,7 @@ function LogInForm() {
 
         // Check if login was successful
         if (data === 'Login successful') {
-            // Redirect to another HTML file upon successful login
-            window.location.href = `./DummyDB/user_data/${artistData.user_name}/UserProfilePage.html`;
+            window.location.href = `./DummyDB/Users/${artistData.username}/UserProfilePage.html`;
         } else {
             // Handle other cases if needed
         }
