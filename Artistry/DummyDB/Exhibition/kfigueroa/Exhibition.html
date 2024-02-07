@@ -1,8 +1,10 @@
+<!-- Exhibition.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artistry</title>
     <link rel="stylesheet" href="style_exhibition.css">
 </head>
 <body>
@@ -39,12 +41,16 @@
             <div class="exhibition"> 
                 <h2>Title of Artwork: {Exhibitions.title} </h2>
 
+                <!-- Dynamically generate Exhibition divs -->
                 <div class="art-exhibit">
-                    <img src="/Images/acrylic_example.jpeg"alt="Art">
-                    <a href="/Images/acrylic_example.jpeg" class="see-art">SEE ART</a>
+                    <!-- Loop through uploaded files and generate Exhibition divs -->
+                    <% for (var i = 0; i < uploadedFiles.length; i++) { %>
+                        <div class="Exhibition">
+                            <img src="/art_exhibit/<%= uploadedFiles[i] %>" alt="Art">
+                            <a href="/art_exhibit/<%= uploadedFiles[i] %>" class="see-art">SEE ART</a>
+                        </div>
+                    <% } %>
                 </div>
-
-
             </div>
         </div>
     </div>

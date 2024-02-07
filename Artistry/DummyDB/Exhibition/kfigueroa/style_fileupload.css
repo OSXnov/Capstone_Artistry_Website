@@ -86,3 +86,19 @@ label:hover {
   font-size: 16px;
   color: #555;
 }
+
+
+button[type="button"] {
+  padding: 15px 30px;
+  background-color: burlywood;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="button"]:hover {
+  background-color: #8b4513;
+}
