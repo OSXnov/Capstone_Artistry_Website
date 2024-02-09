@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs-extra'); // Import the fs module
 const path = require('path');
+const multer = require('multer');
 
 const app = express();
 const port = 5500;
@@ -40,6 +41,20 @@ app.use('/Apps', express.static(path.join(__dirname, 'Apps')));
 
 // Serve files from DummyDB directory
 app.use('/Artistry/DummyDB', express.static(path.join(__dirname, 'DummyDB')));
+
+// Create a storage engine for multer
+const storage = multer.diskStorage({
+  destination: './art_exhibit/', // Specify the directory where uploaded files should be stored
+  filename: function(req, file, cb) {
+    cb(null, file.originalname); // Keep the original file name
+  }
+});
+
+// Initialize multer middleware
+const upload = multer({
+  storage: storage
+}).single('filename'); // 'filename' should match the name attribute of your file input field
+
 
 // Handle user registration and file operations
 app.post('/register', (req, res) => {
@@ -208,18 +223,16 @@ app.post('/submitExhibition', (req, res) => {
 });
 
 
-
+// Route to handle file upload
 app.post('/uploadFile', (req, res) => {
-  const file = req.files.filename;
-  const fileName = file.name;
-  file.mv('./art_exhibit/' + fileName, (err) => {
-      if (err) {
-          console.error('Error uploading file:', err);
-          res.status(500).send('Error uploading file');
-      } else {
-          console.log('File uploaded successfully');
-          res.status(200).send('File uploaded successfully');
-      }
+  upload(req, res, (err) => {
+    if (err) {
+      console.error('Error uploading file:', err);
+      res.status(500).send('Error uploading file');
+    } else {
+      console.log('File uploaded successfully');
+      res.status(200).send('File uploaded successfully');
+    }
   });
 });
 

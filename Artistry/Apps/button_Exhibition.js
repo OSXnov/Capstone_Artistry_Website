@@ -38,28 +38,3 @@ function submitExhibitionForm() {
     });
 }
 
-function uploadArt() {
-    document.getElementById('fileUploadForm').addEventListener('submit', function (event) {
-        event.preventDefault();
-        const formData = new FormData(this);
-        fetch('http://localhost:5500/uploadFiles', { // Update the endpoint to handle multiple files
-            method: 'POST',
-            body: formData,
-        })
-        .then(response => response.json()) // Response will be an array of file names
-        .then(data => {
-            console.log(data);
-            alert('Files uploaded successfully');
-            window.location.href = '/Artistry/Exhibition.html';
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error uploading files');
-        });
-    });
-
-    document.getElementById('myFiles').addEventListener('change', function () { // Update to handle multiple files
-        var fileNames = Array.from(this.files).map(file => file.name).join(', '); // Get names of selected files
-        document.getElementById('file-names').textContent = fileNames || "No files chosen";
-    });
-}

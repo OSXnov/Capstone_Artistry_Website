@@ -51,6 +51,8 @@ p {
   margin-bottom: 20px;
 }
 
+
+
 .file-upload-container {
   display: flex;
   flex-direction: column;
@@ -101,4 +103,14 @@ button[type="button"] {
 
 button[type="button"]:hover {
   background-color: #8b4513;
+}
+
+
+.file-upload-container button[type="button"] {
+  margin-top: 20px; /* Add space between buttons */
+  margin-left: 5px; /* Add margin to separate buttons */
+}
+
+.file-upload-container button[type="button"]:first-child {
+  margin-left: 0; /* Remove left margin from the first button */
 }
