@@ -7,7 +7,8 @@ const cors = require('cors');
 const fs = require('fs-extra'); // Import the fs module
 const path = require('path');
 const fileUpload = require("express-fileupload");
-const session = require("express-session")
+const session = require("express-session");
+
 
 const app = express();
 const port = 5500;
@@ -55,26 +56,6 @@ app.use(session({
 }));
 
 
-// Route to handle file upload
-app.post('/uploadArt',
-    fileUpload({ createParentPath: true }),
-    filesPayloadExists,
-    fileExtLimiter(['.png', '.jpg', '.jpeg']),
-    fileSizeLimiter,
-    (req, res) => {
-        const files = req.files;
-        console.log(files);
-
-        Object.keys(files).forEach(key => {
-            const filepath = path.join(__dirname, 'Artistry/BaseData', files[key].name); // Update the directory structure here
-            files[key].mv(filepath, (err) => {
-                if (err) return res.status(500).json({ status: "error", message: err });
-            });
-        });
-
-        return res.json({ status: 'success', message: Object.keys(files).toString() });
-    }
-);
 
 
 // Handle user registration and file operations
@@ -218,7 +199,7 @@ app.post('/submitExhibition', (req, res) => {
             // Create exhibition directory and copy files
             const sourceFolderPath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\BaseData\\ExhibitionBaseData\\';
             const destinationFolderPath = `C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\DummyDB\\Exhibition\\${username}`;
-
+            const TXTfile = `C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\DummyDB\\Exhibition\\${username}\\art-exhibit\\`
             fs.mkdir(destinationFolderPath, { recursive: true }, (err) => {
               if (err) {
                 console.error('Error creating folder:', err);
@@ -226,9 +207,11 @@ app.post('/submitExhibition', (req, res) => {
               } else {
                 // Copy files to destination folder
                 fs.copy(sourceFolderPath, destinationFolderPath)
+                fs.writeFile(TXTfile, TXTfile.replace('${username}', username))
                   .then(() => {
                     console.log('Files copied successfully');
                     res.status(200).send('Files copied successfully');
+
                   })
                   .catch((err) => {
                     console.error('Error copying files:', err);
@@ -244,7 +227,6 @@ app.post('/submitExhibition', (req, res) => {
       }
     }
   });
-
 });
 
 
@@ -261,14 +243,27 @@ app.post('/uploadArt',
             return res.status(400).json({ status: "error", message: "Username not provided" });
         }
 
-        Object.keys(files).forEach(key => {
-            const filepath = path.join(__dirname, 'Artistry', 'DummyDB', 'Exhibition', username, 'art-exhibit', files[key].name);
-            files[key].mv(filepath, (err) => {
-                if (err) return res.status(500).json({ status: "error", message: err });
-            });
-        });
+        // Read the path from the text file
+        const TXTfile = `C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\DummyDB\\Exhibition\\${username}\\art-exhibit\\path.txt`;
 
-        return res.json({ status: 'success', message: Object.keys(files).toString() });
+        fs.readFile(TXTfile, 'utf8', (err, data) => {
+            if (err) {
+                console.error('Error reading text file:', err);
+                return res.status(500).send('Error reading text file');
+            }
+
+            const destinationFolderPath = data.trim(); // Remove any whitespace characters
+
+            // Proceed with handling file uploads
+            Object.keys(files).forEach(key => {
+                const filepath = path.join(destinationFolderPath, files[key].name);
+                files[key].mv(filepath, (err) => {
+                    if (err) return res.status(500).json({ status: "error", message: err });
+                });
+            });
+
+            return res.json({ status: 'success', message: Object.keys(files).toString() });
+        });
     }
 );
 
