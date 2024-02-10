@@ -164,7 +164,6 @@ app.post('/login', (req, res) => {
 
 
 
-
 app.post('/submitExhibition', (req, res) => {
   // Extract form data
   const { username, password, Title, briefdesc, category } = req.body;
@@ -172,8 +171,8 @@ app.post('/submitExhibition', (req, res) => {
   // Authenticate user
   const artist = new Artist(null, null, username, null, password, null); // Create Artist object with username and password
 
-   // Store username in the session
-   req.session.username = username;
+  // Store username in the session
+  req.session.username = username;
 
   // Validate user credentials before proceeding
   const query = 'SELECT * FROM users WHERE username = ? AND password = ?';
@@ -199,24 +198,48 @@ app.post('/submitExhibition', (req, res) => {
             // Create exhibition directory and copy files
             const sourceFolderPath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\BaseData\\ExhibitionBaseData\\';
             const destinationFolderPath = `C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\DummyDB\\Exhibition\\${username}`;
-            const TXTfile = `C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\DummyDB\\Exhibition\\${username}\\art-exhibit\\`
+
+            // Write content to text file
+            const middlewareFolderPath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\middleware';
+            const txtFilename = `${username}_path.txt`;
+            const TXTfile = path.join(middlewareFolderPath, txtFilename);
+            const txtContent = `C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\DummyDB\\Exhibition\\${username}\\art-exhibit\\`;
+
             fs.mkdir(destinationFolderPath, { recursive: true }, (err) => {
               if (err) {
                 console.error('Error creating folder:', err);
                 res.status(500).send('Error creating folder');
               } else {
-                // Copy files to destination folder
-                fs.copy(sourceFolderPath, destinationFolderPath)
-                fs.writeFile(TXTfile, TXTfile.replace('${username}', username))
-                  .then(() => {
-                    console.log('Files copied successfully');
-                    res.status(200).send('Files copied successfully');
+                // Create middleware directory if it doesn't exist
+                fs.mkdir(middlewareFolderPath, { recursive: true }, (err) => {
+                  if (err) {
+                    console.error('Error creating middleware folder:', err);
+                    res.status(500).send('Error creating middleware folder');
+                  } else {
+                    // Replace `${username}` with the actual username in the text content
+                    const replacedTxtContent = txtContent.replace('${username}', username);
 
-                  })
-                  .catch((err) => {
-                    console.error('Error copying files:', err);
-                    res.status(500).send('Error copying files');
-                  });
+                    // Write content to text file
+                    fs.writeFile(TXTfile, replacedTxtContent, (err) => {
+                      if (err) {
+                        console.error('Error writing to text file:', err);
+                        res.status(500).send('Error writing to text file');
+                      } else {
+                        console.log('Text file created successfully');
+                        // Copy files to destination folder
+                        fs.copy(sourceFolderPath, destinationFolderPath)
+                          .then(() => {
+                            console.log('Files copied successfully');
+                            res.status(200).send('Files copied successfully');
+                          })
+                          .catch((err) => {
+                            console.error('Error copying files:', err);
+                            res.status(500).send('Error copying files');
+                          });
+                      }
+                    });
+                  }
+                });
               }
             });
           }
@@ -237,36 +260,54 @@ app.post('/uploadArt',
     fileSizeLimiter,
     (req, res) => {
         const files = req.files;
-        const { username } = req; // Access username from the request object
 
-        if (!username) {
-            return res.status(400).json({ status: "error", message: "Username not provided" });
-        }
-
-        // Read the path from the text file
-        const TXTfile = `C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\DummyDB\\Exhibition\\${username}\\art-exhibit\\path.txt`;
-
-        fs.readFile(TXTfile, 'utf8', (err, data) => {
+        // Read the path from the text file in the middleware folder
+        const middlewareFolderPath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\middleware';
+        fs.readdir(middlewareFolderPath, (err, filenames) => {
             if (err) {
-                console.error('Error reading text file:', err);
-                return res.status(500).send('Error reading text file');
+                console.error('Error reading middleware folder:', err);
+                return res.status(500).send('Error reading middleware folder');
             }
 
-            const destinationFolderPath = data.trim(); // Remove any whitespace characters
+            // Find the first text file in the middleware folder
+            const txtFile = filenames.find(filename => filename.endsWith('.txt'));
 
-            // Proceed with handling file uploads
-            Object.keys(files).forEach(key => {
-                const filepath = path.join(destinationFolderPath, files[key].name);
-                files[key].mv(filepath, (err) => {
-                    if (err) return res.status(500).json({ status: "error", message: err });
+            if (!txtFile) {
+                return res.status(400).json({ status: "error", message: "Text file not found in middleware folder" });
+            }
+
+            const txtFilePath = path.join(middlewareFolderPath, txtFile);
+
+            // Read the contents of the text file to get the destination folder path
+            fs.readFile(txtFilePath, 'utf8', (err, data) => {
+                if (err) {
+                    console.error('Error reading text file:', err);
+                    return res.status(500).send('Error reading text file');
+                }
+
+                const destinationFolderPath = data.trim(); // Remove any whitespace characters
+
+                // Proceed with handling file uploads
+                Object.keys(files).forEach(key => {
+                    const filepath = path.join(destinationFolderPath, files[key].name);
+                    files[key].mv(filepath, (err) => {
+                        if (err) return res.status(500).json({ status: "error", message: err });
+                    });
+                });
+
+                // Delete the text file after handling file uploads
+                fs.unlink(txtFilePath, (err) => {
+                    if (err) {
+                        console.error('Error deleting text file:', err);
+                        return res.status(500).send('Error deleting text file');
+                    }
+
+                    return res.json({ status: 'success', message: Object.keys(files).toString() });
                 });
             });
-
-            return res.json({ status: 'success', message: Object.keys(files).toString() });
         });
     }
 );
-
 
 // Start the server
 app.listen(port, () => {
