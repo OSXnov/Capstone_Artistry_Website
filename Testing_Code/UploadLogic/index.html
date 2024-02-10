@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Uploader</title>
+</head>
+<body>
+    <h1>Photo Uploader</h1>
+    <input type="file" id="fileInput" accept="image/png">
+    <button onclick="uploadFile()">Upload</button>
+    
+    <script>
+        function uploadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.text();
+            })
+            .then(data => {
+                console.log(data); // Handle successful response
+            })
+            .catch(error => {
+                console.error('There was an error with the upload:', error);
+            });
+        }
+    </script>
+</body>
+</html>
