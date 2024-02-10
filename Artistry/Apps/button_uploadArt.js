@@ -1,26 +1,14 @@
 function uploadArt() {
-    document.getElementById('fileUploadForm').addEventListener('submit', function (event) {
-        event.preventDefault();
-        const formData = new FormData(this);
-        fetch('http://localhost:5500/uploadFile', {
-            method: 'POST',
-            body: formData,
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            alert('Files uploaded successfully');
-            window.location.href = '/Artistry/Exhibition.html';
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error uploading files');
-        });
-    });
+    console.log('uploadArt function called');
+    // Here you can handle the upload logic
+    alert('File(s) uploaded successfully');
+}
 
-    // Event listener for file input change
-    document.getElementById('myFiles').addEventListener('change', function () {
-        var fileNames = Array.from(this.files).map(file => file.name).join(', ');
-        document.getElementById('file-names').textContent = fileNames || "No files chosen";
-    });
+function previewImage(event) {
+    var reader = new FileReader();
+    reader.onload = function() {
+        var output = document.getElementById('previewImg');
+        output.src = reader.result;
+    };
+    reader.readAsDataURL(event.target.files[0]);
 }

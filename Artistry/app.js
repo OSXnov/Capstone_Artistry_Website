@@ -42,18 +42,29 @@ app.use('/Apps', express.static(path.join(__dirname, 'Apps')));
 // Serve files from DummyDB directory
 app.use('/Artistry/DummyDB', express.static(path.join(__dirname, 'DummyDB')));
 
-// Create a storage engine for multer
+
+// Define storage and file filter for multer
 const storage = multer.diskStorage({
-  destination: './art_exhibit/', // Specify the directory where uploaded files should be stored
-  filename: function(req, file, cb) {
-    cb(null, file.originalname); // Keep the original file name
+  destination: function (req, file, cb) {
+      cb(null, './art-exhibit'); // Save files in the art-exhibit directory
+  },
+  filename: function (req, file, cb) {
+      cb(null, file.originalname); // Use original file name
   }
 });
 
-// Initialize multer middleware
+
+// Initialize multer with defined storage and file filter
 const upload = multer({
-  storage: storage
-}).single('filename'); // 'filename' should match the name attribute of your file input field
+  storage: storage,
+  //fileFilter: fileFilter
+});
+
+// Route to handle file upload
+app.post('/uploadArt', upload.array('myFiles', 5), (req, res) => {
+  res.status(200).send('Files uploaded successfully');
+});
+
 
 
 // Handle user registration and file operations
@@ -222,19 +233,6 @@ app.post('/submitExhibition', (req, res) => {
   });
 });
 
-
-// Route to handle file upload
-app.post('/uploadFile', (req, res) => {
-  upload(req, res, (err) => {
-    if (err) {
-      console.error('Error uploading file:', err);
-      res.status(500).send('Error uploading file');
-    } else {
-      console.log('File uploaded successfully');
-      res.status(200).send('File uploaded successfully');
-    }
-  });
-});
 
 // Start the server
 app.listen(port, () => {

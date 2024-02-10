@@ -36,5 +36,6 @@ function submitExhibitionForm() {
     .catch(error => {
         console.error('Error:', error);
     });
-}
 
+    
+}

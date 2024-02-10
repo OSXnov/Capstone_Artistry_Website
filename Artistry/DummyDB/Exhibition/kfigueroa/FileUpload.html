@@ -22,13 +22,12 @@
     <div class="Divider"> <hr> </div> <!-- horizontal line that divides -->
 
     <div class="file-upload-container">
-        <form id="fileUploadForm" enctype="multipart/form-data">
-            <input type="file" id="myFiles" name="filename">
-            <label for="myFiles">Choose File</label>
-            <span id="file-names">No file chosen</span>
-            <button type="button" onclick="uploadArt()">Submit</button>
-        </form>
+        <button onclick="document.getElementById('myFile').click()">Choose Files</button>
+        <input type="file" id="myFile" name="filename" onchange="previewImage(event)">
+        <img id="previewImg" src="#" alt="Preview Image">
+        <span id="file-names">No file chosen</span>
+        <button type="button" onclick="uploadArt()">Submit</button>
     </div>
-    <script src="/Artistry/Apps/button_uploadArt.js"></script>
+    <script src="./button_uploadArt.js"></script>
 </body>
 </html>
