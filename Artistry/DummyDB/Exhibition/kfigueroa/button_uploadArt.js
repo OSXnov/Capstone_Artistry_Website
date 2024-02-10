@@ -19,19 +19,19 @@ function uploadArt() {
     // Here you can send the formData to your server using fetch or XMLHttpRequest
     // Example using fetch:
 
-    fetch('http://localhost:5500/uploadArt', {
-        method: 'POST',
-        body: formData,
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        alert('Files uploaded successfully');
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Error uploading files');
-    });
+    // fetch('http://localhost:5500/uploadArt', {
+    //     method: 'POST',
+    //     body: formData,
+    // })
+    // .then(response => response.json())
+    // .then(data => {
+    //     console.log(data);
+    //     alert('Files uploaded successfully');
+    // })
+    // .catch(error => {
+    //     console.error('Error:', error);
+    //     alert('Error uploading files');
+    // });
    
 }
 
@@ -57,7 +57,7 @@ function saveImageToDirectory(file) {
             const blob = new Blob([arrayBuffer], { type: 'image/jpeg' });
 
             const xhr = new XMLHttpRequest();
-            xhr.open('POST', './art-exhibit', true);
+            xhr.open('POST', 'http://localhost:5500/uploadArt', true); // Use the correct URL
             xhr.setRequestHeader('Content-Type', 'application/octet-stream');
             xhr.send(blob);
         };

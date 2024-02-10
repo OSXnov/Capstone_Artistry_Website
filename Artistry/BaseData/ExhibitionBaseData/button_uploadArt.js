@@ -13,57 +13,87 @@ function uploadArt() {
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
         formData.append('files', file);
-        saveImageToDirectory(file);
     }
 
-    // Here you can send the formData to your server using fetch or XMLHttpRequest
-    // Example using fetch:
-    /*
+    // Send the formData to your server using fetch
     fetch('http://localhost:5500/uploadArt', {
         method: 'POST',
         body: formData,
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
     .then(data => {
-        console.log(data);
+        console.log('File paths:', data.file_paths);
+        // Use file paths as needed
         alert('Files uploaded successfully');
     })
     .catch(error => {
         console.error('Error:', error);
         alert('Error uploading files');
     });
-    */
 }
+
+//function saveImageToDirectory(file) {
+//     const reader = new FileReader();
+//     reader.onload = function() {
+//         const imgDataUrl = reader.result;
+//         const img = new Image();
+//         img.src = imgDataUrl;
+//         img.onload = function() {
+//             const canvas = document.createElement('canvas');
+//             canvas.width = img.width;
+//             canvas.height = img.height;
+//             const ctx = canvas.getContext('2d');
+//             ctx.drawImage(img, 0, 0);
+//             const dataUrl = canvas.toDataURL('image/jpeg');
+//             const imageData = atob(dataUrl.split(',')[1]);
+//             const arrayBuffer = new ArrayBuffer(imageData.length);
+//             const uint8Array = new Uint8Array(arrayBuffer);
+//             for (let i = 0; i < imageData.length; i++) {
+//                 uint8Array[i] = imageData.charCodeAt(i);
+//             }
+//             const blob = new Blob([arrayBuffer], { type: 'image/jpeg' });
+
+//             const xhr = new XMLHttpRequest();
+//             xhr.open('POST', 'http://localhost:5500/uploadArt', true); // Use the correct URL
+//             xhr.setRequestHeader('Content-Type', 'application/octet-stream');
+//             xhr.send(blob);
+//         };
+//     };
+//     reader.readAsDataURL(file);
+// }
+
+
 
 function saveImageToDirectory(file) {
-    const reader = new FileReader();
-    reader.onload = function() {
-        const imgDataUrl = reader.result;
-        const img = new Image();
-        img.src = imgDataUrl;
-        img.onload = function() {
-            const canvas = document.createElement('canvas');
-            canvas.width = img.width;
-            canvas.height = img.height;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0);
-            const dataUrl = canvas.toDataURL('image/jpeg');
-            const imageData = atob(dataUrl.split(',')[1]);
-            const arrayBuffer = new ArrayBuffer(imageData.length);
-            const uint8Array = new Uint8Array(arrayBuffer);
-            for (let i = 0; i < imageData.length; i++) {
-                uint8Array[i] = imageData.charCodeAt(i);
-            }
-            const blob = new Blob([arrayBuffer], { type: 'image/jpeg' });
+    const formData = new FormData();
+    formData.append('file', file);
 
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', './art_exhibit', true);
-            xhr.setRequestHeader('Content-Type', 'application/octet-stream');
-            xhr.send(blob);
-        };
-    };
-    reader.readAsDataURL(file);
+    // Send the formData to your server using fetch
+    fetch('http://localhost:5500/uploadArt', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('File saved successfully:', data.file_path);
+        // Use file path as needed
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error saving file');
+    });
 }
+
 
 function previewImage(event) {
     var reader = new FileReader();

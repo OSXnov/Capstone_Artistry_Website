@@ -43,26 +43,11 @@ app.use('/Apps', express.static(path.join(__dirname, 'Apps')));
 app.use('/Artistry/DummyDB', express.static(path.join(__dirname, 'DummyDB')));
 
 
-// Define storage and file filter for multer
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-      cb(null, './art-exhibit'); // Save files in the art-exhibit directory
-  },
-  filename: function (req, file, cb) {
-      cb(null, file.originalname); // Use original file name
-  }
-});
-
-
-// Initialize multer with defined storage and file filter
-const upload = multer({
-  storage: storage,
-  //fileFilter: fileFilter
-});
 
 // Route to handle file upload
 app.post('/uploadArt', upload.array('myFiles', 5), (req, res) => {
-  res.status(200).send('Files uploaded successfully');
+  const filePaths = req.files.map(file => file.path);
+  res.status(200).json({ file_paths: filePaths });
 });
 
 
