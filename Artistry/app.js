@@ -6,7 +6,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs-extra'); // Import the fs module
 const path = require('path');
-const multer = require('multer');
+const fileUpload = require("express-fileupload");
+const session = require("express-session")
 
 const app = express();
 const port = 5500;
@@ -43,13 +44,37 @@ app.use('/Apps', express.static(path.join(__dirname, 'Apps')));
 app.use('/Artistry/DummyDB', express.static(path.join(__dirname, 'DummyDB')));
 
 
+const filesPayloadExists = require('./middleware/filePayloadExist');
+const fileExtLimiter = require('./middleware/fileExtLimiter');
+const fileSizeLimiter = require('./middleware/fileSizeLimiter');
+
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true
+}));
+
 
 // Route to handle file upload
-app.post('/uploadArt', upload.array('myFiles', 5), (req, res) => {
-  const filePaths = req.files.map(file => file.path);
-  res.status(200).json({ file_paths: filePaths });
-});
+app.post('/uploadArt',
+    fileUpload({ createParentPath: true }),
+    filesPayloadExists,
+    fileExtLimiter(['.png', '.jpg', '.jpeg']),
+    fileSizeLimiter,
+    (req, res) => {
+        const files = req.files;
+        console.log(files);
 
+        Object.keys(files).forEach(key => {
+            const filepath = path.join(__dirname, 'Artistry/BaseData', files[key].name); // Update the directory structure here
+            files[key].mv(filepath, (err) => {
+                if (err) return res.status(500).json({ status: "error", message: err });
+            });
+        });
+
+        return res.json({ status: 'success', message: Object.keys(files).toString() });
+    }
+);
 
 
 // Handle user registration and file operations
@@ -166,6 +191,9 @@ app.post('/submitExhibition', (req, res) => {
   // Authenticate user
   const artist = new Artist(null, null, username, null, password, null); // Create Artist object with username and password
 
+   // Store username in the session
+   req.session.username = username;
+
   // Validate user credentials before proceeding
   const query = 'SELECT * FROM users WHERE username = ? AND password = ?';
   connection.query(query, [artist.username, artist.password], (err, results) => {
@@ -216,7 +244,33 @@ app.post('/submitExhibition', (req, res) => {
       }
     }
   });
+
 });
+
+
+app.post('/uploadArt',
+    fileUpload({ createParentPath: true }),
+    filesPayloadExists,
+    fileExtLimiter(['.png', '.jpg', '.jpeg']),
+    fileSizeLimiter,
+    (req, res) => {
+        const files = req.files;
+        const { username } = req; // Access username from the request object
+
+        if (!username) {
+            return res.status(400).json({ status: "error", message: "Username not provided" });
+        }
+
+        Object.keys(files).forEach(key => {
+            const filepath = path.join(__dirname, 'Artistry', 'DummyDB', 'Exhibition', username, 'art-exhibit', files[key].name);
+            files[key].mv(filepath, (err) => {
+                if (err) return res.status(500).json({ status: "error", message: err });
+            });
+        });
+
+        return res.json({ status: 'success', message: Object.keys(files).toString() });
+    }
+);
 
 
 // Start the server

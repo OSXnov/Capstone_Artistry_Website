@@ -1,15 +1,14 @@
+/* Add styles from the HTML file to the existing CSS file */
 
-h1{
-  color:black;
-
+h1 {
+  color: black;
 }
 
 .Divider hr {
-border: none;
-border-top: 2px solid burlywood;
-margin: 0;
+  border: none;
+  border-top: 2px solid burlywood;
+  margin: 0;
 }
-
 
 ul {
   list-style-type: none;
@@ -35,11 +34,12 @@ li a {
 li a:hover {
   background-color: #111;
 }
-@font-face {
+
+/* No need to duplicate @font-face if already defined in the HTML file */
+/* @font-face {
   font-family: MontSerrat;
   src: url(/Font/Montserrat/Montserrat-VariableFont_wght.ttf);
-}
-
+} */
 
 body {
   font-family: MontSerrat;
@@ -64,7 +64,7 @@ p {
 }
 
 input[type="file"] {
-  display: none;
+  /* display: none; */
 }
 
 label {
@@ -86,7 +86,6 @@ label:hover {
   font-size: 16px;
   color: #555;
 }
-
 
 button[type="button"] {
   padding: 15px 30px;

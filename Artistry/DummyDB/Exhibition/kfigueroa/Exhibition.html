@@ -42,14 +42,7 @@
                 <h2>Title of Artwork: {Exhibitions.title} </h2>
 
                 <!-- Dynamically generate Exhibition divs -->
-                <div class="art-exhibit">
-                    <!-- Loop through uploaded files and generate Exhibition divs -->
-                    <% for (var i = 0; i < uploadedFiles.length; i++) { %>
-                        <div class="Exhibition">
-                            <img src="/art_exhibit/<%= uploadedFiles[i] %>" alt="Art">
-                            <a href="/art_exhibit/<%= uploadedFiles[i] %>" class="see-art">SEE ART</a>
-                        </div>
-                    <% } %>
+                
                 </div>
             </div>
         </div>
