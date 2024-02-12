@@ -64,19 +64,21 @@ p {
 }
 
 input[type="file"] {
-  /* Style the input to match the submit button */
+  /* display: none; */
+}
+
+label {
   padding: 15px 30px;
-  background-color: #8b4513;
+  background-color: burlywood;
   color: #fff;
   font-size: 16px;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-input[type="file"]:hover {
-  background-color: #654321; /* Darken the color on hover */
+label:hover {
+  background-color: burlywood;
 }
 
 #file-name {
@@ -85,9 +87,7 @@ input[type="file"]:hover {
   color: #555;
 }
 
-/* Style the submit button */
-#uploadForm button[type="submit"] {
-  margin-top: 10px;
+button[type="button"] {
   padding: 15px 30px;
   background-color: burlywood;
   color: #fff;
@@ -98,6 +98,6 @@ input[type="file"]:hover {
   transition: background-color 0.3s ease;
 }
 
-#uploadForm button[type="submit"]:hover {
-  background-color: #654321; /* Darken the color on hover */
+button[type="button"]:hover {
+  background-color: #8b4513;
 }
