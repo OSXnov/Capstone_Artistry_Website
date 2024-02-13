@@ -217,7 +217,7 @@ app.post('/submitExhibition', (req, res) => {
                     res.status(500).send('Error creating middleware folder');
                   } else {
                     // Replace `${username}` with the actual username in the text content
-                    const replacedTxtContent = txtContent.replace('${username}', username);
+                    const replacedTxtContent = txtContent.replace('${Users.username}', username);
 
                     // Write content to text file
                     fs.writeFile(TXTfile, replacedTxtContent, (err) => {
@@ -260,6 +260,7 @@ app.post('/uploadArt',
     fileSizeLimiter,
     (req, res) => {
         const files = req.files;
+        const uploadedImageNames = Object.keys(files).map(key => files[key].name);
 
         // Read the path from the text file in the middleware folder
         const middlewareFolderPath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\middleware';
@@ -286,23 +287,36 @@ app.post('/uploadArt',
                 }
 
                 const destinationFolderPath = data.trim(); // Remove any whitespace characters
+                const artExhibitFolderPath = path.join(destinationFolderPath, 'art-exhibit');
 
                 // Proceed with handling file uploads
                 Object.keys(files).forEach(key => {
-                    const filepath = path.join(destinationFolderPath, files[key].name);
+                    const filepath = path.join(artExhibitFolderPath, files[key].name);
                     files[key].mv(filepath, (err) => {
                         if (err) return res.status(500).json({ status: "error", message: err });
                     });
                 });
 
-                // Delete the text file after handling file uploads
-                fs.unlink(txtFilePath, (err) => {
+                // Create a JSON object with the uploaded image names
+                const imagesJSON = JSON.stringify({ images: uploadedImageNames });
+
+                // Write the JSON object to images.json in the art-exhibit folder
+                const imagesJSONPath = path.join(artExhibitFolderPath, 'images.json');
+                fs.writeFile(imagesJSONPath, imagesJSON, (err) => {
                     if (err) {
-                        console.error('Error deleting text file:', err);
-                        return res.status(500).send('Error deleting text file');
+                        console.error('Error writing images.json:', err);
+                        return res.status(500).send('Error writing images.json');
                     }
 
-                    return res.json({ status: 'success', message: Object.keys(files).toString() });
+                    // Delete the text file after handling file uploads
+                    fs.unlink(txtFilePath, (err) => {
+                        if (err) {
+                            console.error('Error deleting text file:', err);
+                            return res.status(500).send('Error deleting text file');
+                        }
+
+                        return res.json({ status: 'success', message: 'Images uploaded and images.json created' });
+                    });
                 });
             });
         });

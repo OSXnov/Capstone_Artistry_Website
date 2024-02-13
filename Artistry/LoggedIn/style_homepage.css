@@ -1,0 +1,79 @@
+h1 {
+  color: black;
+}
+
+.Divider hr {
+  border: none;
+  border-top: 2px solid burlywood;
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: white;
+}
+
+li {
+  float: right;
+}
+
+li a {
+  display: block;
+  color: burlywood;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family: MontSerrat;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+@font-face {
+  font-family: MontSerrat;
+  src: url(/Font/Montserrat/Montserrat-VariableFont_wght.ttf);
+}
+h2{
+  text-align: center;
+}
+
+p {
+  display: block;
+  color: burlywood;
+  text-align: center;
+  font-family: MontSerrat;
+}
+
+/* Additional styles for the "About Us" section */
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+main h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+main p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+main a {
+  color: burlywood;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+main a:hover {
+  color: #b38600;
+}

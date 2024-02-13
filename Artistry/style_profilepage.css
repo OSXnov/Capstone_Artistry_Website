@@ -6,7 +6,6 @@ h1{
   border-top: 2px solid burlywood;
   margin: 0;
 }
-
 .NavBar ul {
     list-style-type: none;
     margin: 0;
@@ -15,12 +14,10 @@ h1{
     background-color: white;
     
   }
-  
   .NavBar li {
     float: right;
   
   }
-  
  .NavBar li a {
     display: block;
     color: burlywood;
@@ -30,7 +27,6 @@ h1{
     font-family: MontSerrat;
    
   }
-  
   .NavBar a:hover {
     background-color: #111;
   }
@@ -38,7 +34,6 @@ h1{
     font-family: MontSerrat;
     src: url(/Font/Montserrat/Montserrat-VariableFont_wght.ttf);
   }
-
   p{
     display: block;
     color:burlywood;
