@@ -260,7 +260,7 @@ app.post('/uploadArt',
     fileSizeLimiter,
     (req, res) => {
         const files = req.files;
-        const uploadedImageNames = Object.keys(files).map(key => files[key].name);
+        const uploadedImageNames = Object.keys(files).map(key => ({ name: files[key].name }));
 
         // Read the path from the text file in the middleware folder
         const middlewareFolderPath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\middleware';
@@ -297,8 +297,8 @@ app.post('/uploadArt',
                     });
                 });
 
-                // Create a JSON object with the uploaded image names
-                const imagesJSON = JSON.stringify({ images: uploadedImageNames });
+                // Write the uploaded image names to a JSON file
+                const imagesJSON = JSON.stringify(uploadedImageNames, null, 2); // null, 2 for pretty formatting
 
                 // Write the JSON object to images.json in the art-exhibit folder
                 const imagesJSONPath = path.join(artExhibitFolderPath, 'images.json');
