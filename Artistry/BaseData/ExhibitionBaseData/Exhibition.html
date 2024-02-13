@@ -54,12 +54,12 @@
             const exhibitionContainer = document.getElementById("exhibition-container");
 
             // Fetch images from folder
-            fetch("./art-exhibit/images.json")
+            fetch("./art-exhibit/art-exhibit/images.json")
                 .then(response => response.json())
                 .then(images => {
                     images.forEach(image => {
                         const imgName = image.name;
-                        const imgSrc = `./art-exhibit/${imgName}`;
+                        const imgSrc = `./art-exhibit/art-exhibit/${imgName}`;
                         const exhibitDiv = document.createElement("div");
                         exhibitDiv.classList.add("exhibit-art");
 
