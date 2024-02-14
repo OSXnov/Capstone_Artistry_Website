@@ -321,7 +321,7 @@ app.post('/uploadArt',
                         }
 
                         return res.json({ status: 'success', message: 'Images uploaded and images.json created' });
-                    });
+                    }); 
                 });
             });
         });
