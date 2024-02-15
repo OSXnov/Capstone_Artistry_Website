@@ -167,8 +167,54 @@ app.post('/login', (req, res) => {
   });
 });
 
+// Function to save username to JSON file
+function saveUsernameToJson(username) {
+  const filePath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\Exhibition\\exhibition.json';
+    // Check if the file exists
+    fs.access(filePath, fs.constants.F_OK, (err) => {
+      if (err) {
+          // If the file does not exist, create it with an empty array
+          if (err.code === 'ENOENT') {
+              const initialData = [{ "name": username }];
+              fs.writeFile(filePath, JSON.stringify(initialData, null, 2), 'utf8', (err) => {
+                  if (err) {
+                      console.error('Error creating JSON file:', err);
+                      return;
+                  }
+                  console.log('JSON file created successfully');
+              });
+          } else {
+              console.error('Error accessing file:', err);
+          }
+      }
+
+      // After file creation or if it already exists, proceed to read, update, and write
+      fs.readFile(filePath, 'utf8', (err, data) => {
+          if (err) {
+              console.error('Error reading JSON file:', err);
+              return;
+          }
+
+          try {
+              const jsonData = data ? JSON.parse(data) : [{ "name": username }];
+              jsonData.push({ "name": username });
+
+              fs.writeFile(filePath, JSON.stringify(jsonData, null, 2), 'utf8', (err) => {
+                  if (err) {
+                      console.error('Error writing to JSON file:', err);
+                  } else {
+                      console.log('Username added to JSON file successfully');
+                  }
+              });
+          } catch (error) {
+              console.error('Error parsing JSON data:', error);
+          }
+      });
+  });
+}
 
 app.post('/submitExhibition', (req, res) => {
+
   // Extract form data
   const { username, password, Title, briefdesc, category } = req.body;
 
@@ -255,6 +301,7 @@ app.post('/submitExhibition', (req, res) => {
                               exhibitionPageData = exhibitionPageData.replace('{exhibition.title}', exhibit.Title);
                               exhibitionPageData = exhibitionPageData.replace('{exhibition.briefdesc}', exhibit.briefdesc);
 
+
                               // Save the modified file
                               fs.writeFile(path.join(destinationFolderPath, 'Exhibition.html'), exhibitionPageData, (err) => {
                                 if (err) {
@@ -263,9 +310,13 @@ app.post('/submitExhibition', (req, res) => {
                                 }
                                 console.log('ExhibitionPage.html updated successfully');
                                 res.json({ status: 'success', message: 'Images uploaded and images.json created' });
+                                // Save username into JSON file
+                                saveUsernameToJson(artist.username);
                               });
                             });
                           })
+
+
                           .catch((err) => {
                             console.error('Error copying files:', err);
                             res.status(500).send('Error copying files');
@@ -355,6 +406,10 @@ app.post('/uploadArt',
         });
     }
 );
+
+
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
