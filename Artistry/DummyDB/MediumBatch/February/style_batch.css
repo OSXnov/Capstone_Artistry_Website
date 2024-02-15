@@ -1,0 +1,95 @@
+h1{
+    color:black;
+  
+}
+
+h2,p{
+  text-align: center;
+  color: black;
+  font-family: MontSerrat;
+}
+
+.Divider hr {
+  border: none;
+  border-top: 2px solid burlywood;
+  margin: 0;
+}
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+  }
+  
+  li {
+    float: right;
+  }
+  
+  li a {
+    display: block;
+    color: burlywood;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: MontSerrat;
+  }
+  
+  li a:hover {
+    background-color: #111;
+  }
+  @font-face {
+    font-family: MontSerrat;
+    src: url(/Font/Montserrat/Montserrat-VariableFont_wght.ttf);
+  }
+
+
+
+
+  main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+
+  
+
+  .art-medium {
+    width: 200px;
+    text-align: center;
+    margin: 10px;
+    float: left;
+  }
+  
+
+  
+  .see-info {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: burlywood; 
+    color: black; /* Set the text color to white or your desired color */
+    text-decoration: none; /* Remove underlines from the link */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    font-family: MontSerrat;
+  
+  }
+
+  .art-medium p{
+    font-weight: bold;
+    color: darkgoldenrod;
+  }
+  
+  
+  .medium-board p,h2{
+    text-align: center;
+    color: darkgoldenrod;
+  }
+  
+  .art-medium img {
+    width: 100%;
+    height: 150px; /* Set the desired height */
+    object-fit: cover; /* Preserve aspect ratio while covering the specified height */
+  }

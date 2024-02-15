@@ -1,10 +1,10 @@
 h1{
-    color:black;
+  color:black;
 }
 .Divider hr {
-  border: none;
-  border-top: 2px solid burlywood;
-  margin: 0;
+border: none;
+border-top: 2px solid burlywood;
+margin: 0;
 }
 
 ul {
@@ -53,7 +53,7 @@ p{
   position: relative;
 }
 
-.top { 
+.top {
   width: 100%;
   padding-bottom: 56.25%; /* 16:9 aspect ratio */
   background-size: cover;
@@ -133,6 +133,15 @@ p {
   font-family: MontSerrat;
 }
 
+
+.watercolor-title{
+  color: darkolivegreen;
+  font-family: MontSerrat;
+  font-size: 32px;
+}
+
+
+
 .art-medium {
   width: 200px;
   text-align: center;
@@ -140,9 +149,13 @@ p {
   float: left;
 }
 
+.art-medium img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
 
-
-.see-more {
+.view-artist {
   display: block;
   margin: 10px auto;
   padding: 10px;
@@ -160,42 +173,8 @@ p {
 }
 
 
-.medium-board p,h2{
-  text-align: center;
-  color: darkgoldenrod;
-}
-
 .art-medium img {
   width: 100%;
   height: 150px; /* Set the desired height */
   object-fit: cover; /* Preserve aspect ratio while covering the specified height */
 }
-
-.Medium-batch {
-  text-align: center;
-}
-
-.Medium-batch img {
-  width: 75%;
-  height: 60vh; /* 70% of the viewport height */
-  object-fit: cover;
-}
-
-h2,h3{
-  text-align: center;
-  font-size: 2em; /* Adjust the font size as needed */
-  color: burlywood; /* Set the text color */
-  font-family: Montserrat, sans-serif; /* Set the font family */
-}
-
-.see-batch {
-  display: block;
-  margin: 10px auto;
-  padding: 8px 16px;
-  background-color: burlywood; 
-  color: black;
-  text-decoration: none;
-  border-radius: 5px;
-  font-family: Montserrat;
-  width: fit-content; /* Set the width to fit the content */
-} 

@@ -1,0 +1,86 @@
+h1{
+    color:black;
+  
+}
+
+h2,p{
+  text-align: center;
+  color: black;
+  font-family: MontSerrat;
+}
+
+.Divider hr {
+  border: none;
+  border-top: 2px solid burlywood;
+  margin: 0;
+}
+
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+  }
+  
+  li {
+    float: right;
+  }
+  
+  li a {
+    display: block;
+    color: burlywood;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-family: MontSerrat;
+  }
+  
+  li a:hover {
+    background-color: #111;
+  }
+  @font-face {
+    font-family: MontSerrat;
+    src: url(/Font/Montserrat/Montserrat-VariableFont_wght.ttf);
+  }
+
+
+
+
+  main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .Left-Side {
+    width: 50%;
+    float: left;
+}
+
+.Right-Side {
+    width: 50%;
+    float: right;
+}
+
+.profile {
+    padding: 40px 20px; /* Adjust the top padding to lower the text */
+    background-color: #f9f9f9; /* Light gray background */
+}
+
+
+.exhibition {
+    padding: 20px;
+}
+
+.exhibition img {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow effect */
+}
+
+.exhibition p {
+    text-align: left; /* Align text to the left */
+}

@@ -4,46 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artistry</title>
-    <link rel="stylesheet" href="style_exhibition.css">
+    <link rel="stylesheet" type="text/css" href="style_mediumcat.css">
 </head>
+
 <body>
-    <header> 
+    <header>
         <img src="/Images/Artistry_HorizontalLogo.PNG" style="width: 300px; height:100px">
         <nav>
             <div class="NavBar">
                 <ul>
                     <li><a href="/Artistry/HomePage.html">Home</a></li>
-                    <li><a href="MediumPage.html">Medium</a></li>
-                    <li><a href="/Artistry/Exhibition/ExhibitionPage.html">Exhibitions</a></li>
-                    <li><a href="UserProfilePage.html">My Profile</a></li>
+                    <li><a href="/Artistry/MediumPage.html">Medium</a></li>
+                    <li><a href="/Artistry/ProfilePage.html">Profile</a>
                 </ul>
             </div>
         </nav>
     </header>
+    <div class="Divider"> <hr> </div> <!-- horizontal line that divides -->
 
-    <div class="Divider">
-        <hr> 
-    </div>
-
-    <div class="Container">
-        <div class="Left-Side">
-            <section class="profile">
-                <div class="header">
-                   <p>User Name: {Users.user_name}</p>
-                   <p>Email: {Users.email}</p>
-                   <p>Topic or Theme</p>
-                   <p>Brief Description</p>
-                </div>
-            </section>
+    <main>      
+        <div class="watercolor-title">
+            <h2>Watercolor</h2>
         </div>
-
-        <div class="Right-Side">
-            <div class="exhibition" id="exhibition-container"> 
-                <h2>Title of Artwork: {Exhibitions.title} </h2>
-                <!-- Dynamically generate Exhibition divs -->
-            </div>
+        <div class="art-medium" id="art-medium">
+            <!-- Images will be dynamically added here -->
         </div>
-    </div>
+    </main>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -51,17 +37,23 @@
         });
 
         function fetchImages() {
-            const exhibitionContainer = document.getElementById("exhibition-container");
+            const artMediumContainer = document.getElementById("art-medium");
+
+            // Check if artMediumContainer exists
+            if (!artMediumContainer) {
+                console.error("Art medium container not found!");
+                return;
+            }
 
             // Fetch images from folder
-            fetch("./art-exhibit/art-exhibit/images.json")
+            fetch("/Images/WaterColor/Images.json")
                 .then(response => response.json())
                 .then(images => {
                     images.forEach(image => {
                         const imgName = image.name;
-                        const imgSrc = `./art-exhibit/art-exhibit/${imgName}`;
+                        const imgSrc = `/Images/WaterColor/${imgName}`;
                         const exhibitDiv = document.createElement("div");
-                        exhibitDiv.classList.add("exhibit-art");
+                        exhibitDiv.classList.add("medium-art");
 
                         const imgElement = document.createElement("img");
                         imgElement.src = imgSrc;
@@ -69,12 +61,12 @@
                         exhibitDiv.appendChild(imgElement);
 
                         const seeArtLink = document.createElement("a");
-                         seeArtLink.classList.add("see-art");
-                       seeArtLink.href = imgSrc;
+                        seeArtLink.classList.add("see-art");
+                        seeArtLink.href = imgSrc;
                         seeArtLink.textContent = "SEE ART";
                         exhibitDiv.appendChild(seeArtLink);
 
-                        exhibitionContainer.appendChild(exhibitDiv);
+                        artMediumContainer.appendChild(exhibitDiv);
                     });
                 })
                 .catch(error => console.error("Error fetching images:", error));
