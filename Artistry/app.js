@@ -76,7 +76,7 @@ app.post('/register', (req, res) => {
 
       // Task 1: Locate a folder at a specific path
       const sourceFolderPath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\BaseData\\UserBaseData\\';
-      const destinationFolderPath = `C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\DummyDB\\Users\\${username}`;
+      const destinationFolderPath = `C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\DummyDB\\Users\\${artist.username}`;
 
       // Create user directory
       fs.mkdir(destinationFolderPath, { recursive: true }, (err) => {
@@ -96,31 +96,32 @@ app.post('/register', (req, res) => {
           console.log('');
 
           // Read UserProfilePage.html file
-        fs.readFile(path.join(destinationFolderPath, 'UserProfilePage.html'), 'utf8', (err, data) => {
-          if (err) {
-              console.error('Error reading file:', err);
-              return res.status(500).send('Error reading file');
-          }
+          fs.readFile(path.join(destinationFolderPath, 'UserProfilePage.html'), 'utf8', (err, data) => {
+            if (err) {
+                console.error('Error reading file:', err);
+                return res.status(500).send('Error reading file');
+            }
 
-          // Replace placeholder values with user data
-          userProfileData = data.replace('{Users.User_name}', artist.username);
-          userProfileData = data.replace('{Users.firstname}', artist.firstname);
-          userProfileData = data.replace('{User.lastname}', artist.lastname);
-          userProfileData = data.replace('{User.email}', artist.email);
+            // Replace placeholder values with user data
+            let userProfileData = data; // Make sure to initialize userProfileData with the original data
 
+            userProfileData = userProfileData.replace('{Users.User_name}', artist.username);
+            userProfileData = userProfileData.replace('{Users.firstname}', artist.firstname);
+            userProfileData = userProfileData.replace('{Users.lastname}', artist.lastname);
+            userProfileData = userProfileData.replace('{Users.email}', artist.email);
 
-          // You can add more replacements for other user data here
+            // You can add more replacements for other user data here
 
-          // Save the modified file
-          fs.writeFile(path.join(destinationFolderPath, 'UserProfilePage.html'), userProfileData, (err) => {
-              if (err) {
-                  console.error('Error saving file:', err);
-                  return res.status(500).send('Error saving file');
-              }
-              console.log('User registered and Files copied successfully');
-              res.status(200).send('User registered and Files copied successfully');
+            // Save the modified file
+            fs.writeFile(path.join(destinationFolderPath, 'UserProfilePage.html'), userProfileData, (err) => {
+                if (err) {
+                    console.error('Error saving file:', err);
+                    return res.status(500).send('Error saving file');
+                }
+                console.log('User registered and Files copied successfully');
+                res.status(200).send('User registered and Files copied successfully');
+            });
           });
-        });
         });
       });
     }
@@ -167,8 +168,6 @@ app.post('/login', (req, res) => {
 });
 
 
-
-
 app.post('/submitExhibition', (req, res) => {
   // Extract form data
   const { username, password, Title, briefdesc, category } = req.body;
@@ -189,6 +188,8 @@ app.post('/submitExhibition', (req, res) => {
       console.log('Query results:', results);
       if (results.length > 0) {
         console.log('Login successful');
+        const email = results[0].email; 
+
 
         // If login is successful, insert exhibition data
         const exhibit = new Exhibition(Title, briefdesc, username, category);
@@ -200,7 +201,6 @@ app.post('/submitExhibition', (req, res) => {
           } else {
             console.log('Exhibition data inserted successfully');
 
-            // Create exhibition directory and copy files
             const sourceFolderPath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\BaseData\\ExhibitionBaseData\\';
             const destinationFolderPath = `C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\DummyDB\\Exhibition\\${username}`;
 
@@ -231,11 +231,40 @@ app.post('/submitExhibition', (req, res) => {
                         res.status(500).send('Error writing to text file');
                       } else {
                         console.log('Text file created successfully');
+
                         // Copy files to destination folder
                         fs.copy(sourceFolderPath, destinationFolderPath)
                           .then(() => {
                             console.log('Files copied successfully');
-                            res.status(200).send('Files copied successfully');
+
+                            // Read ExhibitionPage.html file
+                            fs.readFile(path.join(destinationFolderPath, 'Exhibition.html'), 'utf8', (err, data) => {
+                              if (err) {
+                                console.error('Error reading file:', err);
+                                return res.status(500).send('Error reading file');
+                              }
+
+                              // Replace placeholder values with user and exhibition data
+                              let exhibitionPageData = data;
+
+                              // Replace user data
+                              exhibitionPageData = exhibitionPageData.replace('{Users.user_name}', artist.username);
+                              exhibitionPageData = exhibitionPageData.replace('{Users.email}', email);
+
+                              // Replace exhibition data
+                              exhibitionPageData = exhibitionPageData.replace('{exhibition.title}', exhibit.Title);
+                              exhibitionPageData = exhibitionPageData.replace('{exhibition.briefdesc}', exhibit.briefdesc);
+
+                              // Save the modified file
+                              fs.writeFile(path.join(destinationFolderPath, 'Exhibition.html'), exhibitionPageData, (err) => {
+                                if (err) {
+                                  console.error('Error saving file:', err);
+                                  return res.status(500).send('Error saving file');
+                                }
+                                console.log('ExhibitionPage.html updated successfully');
+                                res.json({ status: 'success', message: 'Images uploaded and images.json created' });
+                              });
+                            });
                           })
                           .catch((err) => {
                             console.error('Error copying files:', err);
@@ -256,7 +285,6 @@ app.post('/submitExhibition', (req, res) => {
     }
   });
 });
-
 
 app.post('/uploadArt',
     fileUpload({ createParentPath: true }),

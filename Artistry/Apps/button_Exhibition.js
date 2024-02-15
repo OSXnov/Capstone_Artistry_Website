@@ -18,24 +18,15 @@ function submitExhibitionForm() {
             'Content-Type': 'application/json',
         },
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.text();
-    }) 
+    .then(response => response.json())
     .then(data => {
-        console.log(data)
-        if(data == 'Files copied successfully'){
-            console.log('Redirecting to Exhibition Page')
+        console.log(data);
+        if (data.status === 'success') {
+            console.log('Redirecting to Exhibition Page');
             window.location.href = `/Artistry/DummyDB/Exhibition/${exhibitionData.username}/FileUpload.html`;
-        } else{
-            console.error('Redirection Failed', data);
+        } else {
+            console.error('Redirection Failed', data.message);
         }
     })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-
     
 }

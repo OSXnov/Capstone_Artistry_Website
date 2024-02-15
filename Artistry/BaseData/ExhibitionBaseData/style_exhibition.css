@@ -199,3 +199,40 @@ li a:hover {
   height: 150px; /* Set the desired height */
   object-fit: cover; /* Preserve aspect ratio while covering the specified height */
 }
+
+.user-info {
+  background-color: #f8f8f8; /* Light gray background */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+.user-info p {
+  margin: 5px 0;
+  color: #333; /* Dark gray color */
+}
+
+.user-info p:first-child {
+  font-weight: bold;
+}
+
+.user-info p:last-child {
+  margin-bottom: 20px; /* Add some space below the last paragraph */
+}
+.profile-picture-container {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 50%;
+  background-color: burlywood;
+  margin-left: 20px;
+  box-shadow: 5px 5px 10px rgba(139, 69, 19, 0.5);
+  margin-top: 20px;
+}
+
+.profile-picture-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}

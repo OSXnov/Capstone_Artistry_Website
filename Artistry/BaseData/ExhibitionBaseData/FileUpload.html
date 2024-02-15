@@ -16,6 +16,7 @@
                     <li><a href="/Artistry/HomePage.html">Home</a></li>
                     <li><a href="/Artistry/MediumPage.html">Medium</a></li>
                     <li><a href="UserProfilePage.html">My Profile</a></li>
+                    
                 </ul>
             </div>
         </nav>
@@ -59,10 +60,14 @@
 
             const h3 = document.querySelector('h3');
             h3.textContent = json?.message;
+            // Redirect to Exhibition.html if upload is successful
+            if (json?.status === 'success') {
+                window.location.href = '/Exhibition.html';
+            }
 
-            console.log(json);
+            
         };
-
+        
         // Event listener for form submission
         const form = document.getElementById('uploadForm');
         form.addEventListener('submit', (e) => {
