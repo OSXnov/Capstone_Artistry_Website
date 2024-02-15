@@ -1,7 +1,7 @@
 function submitForm() {
     const form = document.getElementById("registrationForm");
     const formData = new FormData(form);
-
+//CLient-side code Front-End
     // Convert FormData to JSON object 
     const artistData = {
         first_name: formData.get('fname'),
@@ -13,7 +13,7 @@ function submitForm() {
     }; 
 
     fetch('http://localhost:5500/register', {
-        method: 'POST',
+        method: 'POST', 
         body: JSON.stringify(artistData),
         headers: {
             'Content-Type': 'application/json',

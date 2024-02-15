@@ -57,7 +57,7 @@ app.use(session({
 
 
 
-
+//Server Side BackEND
 // Handle user registration and file operations
 app.post('/register', (req, res) => {
   console.log('Request body:', req.body);
@@ -76,7 +76,7 @@ app.post('/register', (req, res) => {
 
       // Task 1: Locate a folder at a specific path
       const sourceFolderPath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\BaseData\\UserBaseData\\';
-      const destinationFolderPath = `C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\DummyDB\\Users\\${user_name}`;
+      const destinationFolderPath = `C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\DummyDB\\Users\\${username}`;
 
       // Create user directory
       fs.mkdir(destinationFolderPath, { recursive: true }, (err) => {
@@ -95,7 +95,7 @@ app.post('/register', (req, res) => {
           }
           console.log('');
 
-                  // Read UserProfilePage.html file
+          // Read UserProfilePage.html file
         fs.readFile(path.join(destinationFolderPath, 'UserProfilePage.html'), 'utf8', (err, data) => {
           if (err) {
               console.error('Error reading file:', err);
@@ -103,7 +103,12 @@ app.post('/register', (req, res) => {
           }
 
           // Replace placeholder values with user data
-          const userProfileData = data.replace('{User.User_name}', artist.username);
+          userProfileData = data.replace('{Users.User_name}', artist.username);
+          userProfileData = data.replace('{Users.firstname}', artist.firstname);
+          userProfileData = data.replace('{User.lastname}', artist.lastname);
+          userProfileData = data.replace('{User.email}', artist.email);
+
+
           // You can add more replacements for other user data here
 
           // Save the modified file
@@ -316,7 +321,7 @@ app.post('/uploadArt',
                         }
 
                         return res.json({ status: 'success', message: 'Images uploaded and images.json created' });
-                    });
+                    }); 
                 });
             });
         });

@@ -1,5 +1,5 @@
 function LogInForm() {
-    console.log('Login button clicked');
+    //console.log('Login button clicked');
     const form = document.getElementById("LogInForm");
     const formData = new FormData(form);
 
