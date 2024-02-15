@@ -1,0 +1,103 @@
+/* Add styles from the HTML file to the existing CSS file */
+
+h1 {
+  color: black;
+}
+
+.Divider hr {
+  border: none;
+  border-top: 2px solid burlywood;
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: white;
+}
+
+li {
+  float: right;
+}
+
+li a {
+  display: block;
+  color: burlywood;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family: MontSerrat;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+/* No need to duplicate @font-face if already defined in the HTML file */
+/* @font-face {
+  font-family: MontSerrat;
+  src: url(/Font/Montserrat/Montserrat-VariableFont_wght.ttf);
+} */
+
+body {
+  font-family: MontSerrat;
+  margin-top: 50px;
+}
+
+p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.file-upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  margin: auto;
+  padding: 20px;
+  border: 2px dashed burlywood;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+input[type="file"] {
+  /* display: none; */
+}
+
+label {
+  padding: 15px 30px;
+  background-color: burlywood;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+label:hover {
+  background-color: burlywood;
+}
+
+#file-name {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #555;
+}
+
+button[type="button"] {
+  padding: 15px 30px;
+  background-color: burlywood;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="button"]:hover {
+  background-color: #8b4513;
+}

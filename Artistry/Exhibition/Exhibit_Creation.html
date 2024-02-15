@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Artistry</title>
+        <link rel="stylesheet" type="text/css" href="style_exhibitcreation.css">
+    </head>
+
+    <body>
+        <header>
+            <img src="/Images/Artistry_HorizontalLogo.PNG" style="width: 300px; height:100px">
+            <nav>
+                <div class="NavBar">
+                <ul>
+                    <li><a href="/Artistry/HomePage.html">Home</a></li>
+                    <li><a href="/Artistry/MediumPage.html">Medium</a></li>
+                    <li><a href="UserProfilePage.html">My Profile</a>
+                </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="Divider"> <hr> </div> <!-- horizontal line that divides -->
+
+
+        <main>      
+            <form id="exhibitionForm">
+                <div class="container">
+                    <div class="ExhibitTitle">
+                        <h1>Fill Out the Exhibition Form</h1>
+                    </div>
+                    <div class="UserName"> 
+                        <input type="text" id="uname" name="uname" placeholder="UserName" required>
+                    </div>
+                    <div class="Password"> 
+                        <input type="password" id="pwd" name="pwd" placeholder="PASSWORD" required>
+                    </div>
+                    <div class="TitleOfArt"> 
+                        <input type="text" id="title" name="title" placeholder="Title Of Art" required>
+                    </div>
+                    <div class="ArtTheme">
+                        <select id="category" name="category">
+                            <option value="" selected disabled>Select Category</option>
+                            <option value="watercolor">Watercolor</option>
+                            <option value="oil">Oil</option>
+                            <option value="graffiti">Graffiti</option>
+                            <!-- Add more options as needed -->
+                        </select>
+                    </div>
+                    <div class="briefdesc"> 
+                        <textarea id="briefdesc" name="briefdesc" placeholder="Brief Description (max 280 characters)" rows="6" maxlength="280" required></textarea>
+                    </div>
+                    <div class="Button"> 
+                        <button type="button" onclick="submitExhibitionForm()">Submit</button>
+                    </div>
+                </div>
+            </form>
+            <script src="/Artistry/Apps/button_Exhibition.js"></script>
+        </main>
+    </body>
+</html>

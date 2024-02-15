@@ -1,7 +1,8 @@
 body {
-  font-family: MontSerrat;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   padding: 0; 
+  background-color: #f2f2f2;
 }
 
 .Divider hr {
@@ -9,129 +10,73 @@ body {
   border-top: 2px solid burlywood;
   margin: 0;
 }
- 
-@font-face {
-  font-family: MontSerrat;
-  src: url('/Font/Montserrat/Montserrat-VariableFont_wght.ttf');
-}
-
-:root {
-  --background-color: rgb(204, 193, 175);
-  --button-background: burlywood;
-}
 
 .NavBar ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: white;
+  background-color: #fff;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .NavBar li {
-  float: right;
+  margin-right: 20px;
 }
 
 .NavBar li a {
-  display: block;
   color: burlywood;
-  text-align: center;
-  padding: 14px 16px;
   text-decoration: none;
-  font-family: MontSerrat;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .NavBar a:hover {
-  background-color: #111;
-}
-
-input[type=text],
-input[type=password],
-select,
-textarea {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 10px;
-  color: black;
-  border: none;
-  border-radius: 4px;
-  resize: vertical;
-  background-color: var(--background-color);
-}
-
-input[type=text]:focus,
-input[type=password]:focus {
-  background-color: lightblue;
-}
-
-label {
-  padding: 12px 12px 12px 0;
-  display: inline-block;
-}
-
-input[type=submit] {
-  background-color: var(--button-background);
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-}
-
-input[type=submit]:hover {
-  background-color: grey;
+  color: #111;
 }
 
 .container {
-  border-radius: 5px;
-  background-color: white;
-  padding: 20px;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.container {
-  width: 100%;
-  margin-top: 0; 
-}
-
-.container::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-* Sign-in Form styles */
-
-.signInForm {
-  font-family: MontSerrat;
   max-width: 400px;
-  margin: 0 auto;
+  margin: 50px auto;
   padding: 20px;
-  background-color: white;
-  border-radius: 5px;
+  background-color: #fff;
+  border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Adjust the styles for password input to match the text input */
-.signInForm input[type=password] {
-  background-color: var(--background-color);
+.container h1 {
+  text-align: center;
+  color: #333;
 }
 
-.Button button {
-  background-color: var(--button-background);
+.container input[type=text],
+.container input[type=password] {
+  width: calc(100% - 24px);
+  padding: 12px;
+  margin-bottom: 20px;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+  background-color: #f2f2f2;
+}
+
+.container input[type=text]:focus,
+.container input[type=password]:focus {
+  background-color: #e1e1e1;
+}
+
+.container button {
+  background-color: burlywood;
   color: white;
-  padding: 12px 20px;
+  padding: 12px 0;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   width: 100%;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
-.Button button:hover {
-  background-color: grey;
-  color: burlywood;
+.container button:hover {
+  background-color: #b38600;
 }
-
-
-
