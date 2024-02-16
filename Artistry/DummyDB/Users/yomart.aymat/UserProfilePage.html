@@ -68,15 +68,15 @@
         <div class="Right-Side">
             <ul>
                 <li>
-                    <div class="image-userprofile"> 
-                        <h2>Exhibition</h2>
-                        <p> Here's my work</p>
-                        <!-- Add code to display user portfolio images as needed -->
+                    <h2>Exhibition</h2>
+                    <p> Here's my work</p>
+                    <div class="exhibition" id="exhibition-container"> 
+                        <!-- Dynamically generate Exhibition divs -->
                     </div>
-    
-                    
                 </li>
             </ul>
+            <!-- Container for past exhibitions -->
+            <div class="past-exhibitions" id="past-exhibitions"></div>
         </div>
     <!-- JavaScript code for handling form submission -->
     <script>
@@ -149,7 +149,25 @@
     
     
     
-    
+        // Function to fetch and display past exhibitions
+        const fetchAndDisplayPastExhibitions = (username) => {
+        fetch('/Artistry/Exhibition/exhibition.json')
+        .then(response => response.json())
+        .then(data => {
+            // Filter exhibitions to match the username
+            const userExhibitions = data.filter(exhibition => exhibition.name === username);
+            
+            // Create HTML for past exhibitions
+            const pastExhibitionsHTML = userExhibitions.map(exhibition => {
+                return `<li>${exhibition.name}</li>`;
+            }).join('');
+
+            // Display past exhibitions below "My Portfolio"
+            const pastExhibitionsContainer = document.getElementById('past-exhibitions');
+            pastExhibitionsContainer.innerHTML = pastExhibitionsHTML;
+        })
+        .catch(error => console.error('Error fetching past exhibitions data:', error));
+};
         // Fetch user data from usr_data.json and create anchor tag
         fetch('/Artistry/middleware/usr_data.json')
             .then(response => response.json())

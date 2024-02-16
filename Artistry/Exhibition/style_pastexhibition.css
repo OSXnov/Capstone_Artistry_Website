@@ -177,3 +177,22 @@ ul {
   h2{
     font-family: MontSerrat;
   }
+
+  #exhibition-links {
+    margin-top: 20px; /* Add some space above the links */
+}
+
+#exhibition-links li {
+    margin-bottom: 10px; /* Add some space between each link */
+}
+
+#exhibition-links li a {
+    color: burlywood; /* Change the link color */
+    text-decoration: none; /* Remove the underline */
+    font-weight: bold; /* Make the link text bold */
+    font-family: 'Arial', sans-serif; /* Change the font family */
+}
+
+#exhibition-links li a:hover {
+    color: grey; /* Change the link color on hover */
+}
