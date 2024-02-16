@@ -55,8 +55,6 @@ const fileExtLimiter = require('./middleware/fileExtLimiter');
 const fileSizeLimiter = require('./middleware/fileSizeLimiter');
 const loggedInUsers = {}; // Store logged-in users in memory
 
-//Server Side BackEND
-// Handle user registration and file operations
 app.post('/register', (req, res) => {
   console.log('Request body:', req.body);
   const { first_name, last_name, user_name, email, password, age } = req.body;
@@ -110,35 +108,57 @@ app.post('/register', (req, res) => {
 
           // You can add more replacements for other user data here
           // Create user data JSON file
-          const userData = { username: username };
+          const userData = { username: artist.username };
           const middlewareDirectoryPath = path.join(__dirname, 'middleware');
           const userDataFilePath = path.join(middlewareDirectoryPath, 'usr_data.json');
+          
+
+         
+          const middlewareFolderPath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\middleware';
+          const txtFilename = `${artist.username}_path.txt`;
+          const TXTfile = path.join(middlewareFolderPath, txtFilename);
+          const txtContent = `C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\DummyDB\\Users\\${artist.username}\\user_imgs\\profilepic\\`;
+
 
           // Create the middleware directory if it doesn't exist
           fs.mkdir(middlewareDirectoryPath, { recursive: true }, (err) => {
             if (err) {
               console.error('Error creating middleware directory:', err);
               return res.status(500).send('Error creating middleware directory');
-            }
+            } else{
+              const replacedTxtContent = txtContent.replace('${artist.username}', artist.username);
 
-            // Write user data file
-            fs.writeFile(userDataFilePath, JSON.stringify(userData), (err) => {
-              if (err) {
-                console.error('Error creating user data file:', err);
-                return res.status(500).send('Error creating user data file');
-              }
-              console.log('User data file created successfully');
+            
 
-              // Save the modified file
-              fs.writeFile(path.join(destinationFolderPath, 'UserProfilePage.html'), userProfileData, (err) => {
+              // Write content to text file
+              fs.writeFile(TXTfile, replacedTxtContent, (err) => {
                 if (err) {
-                  console.error('Error saving file:', err);
-                  return res.status(500).send('Error saving file');
+                  console.error('Error writing to text file:', err);
+                  res.status(500).send('Error writing to text file');
+                } else {
+                  console.log('Text file created successfully');
                 }
-                console.log('User registered and Files copied successfully');
-                return res.status(200).send('User registered and Files copied successfully');
               });
-            });
+
+              // Write user data file
+              fs.writeFile(userDataFilePath, JSON.stringify(userData), (err) => {
+                if (err) {
+                  console.error('Error creating user data file:', err);
+                  return res.status(500).send('Error creating user data file');
+                }
+                console.log('User data file created successfully');
+
+                // Save the modified file
+                fs.writeFile(path.join(destinationFolderPath, 'UserProfilePage.html'), userProfileData, (err) => {
+                  if (err) {
+                    console.error('Error saving file:', err);
+                    return res.status(500).send('Error saving file');
+                  }
+                  console.log('User registered and Files copied successfully');
+                  return res.status(200).send('User registered and Files copied successfully');
+                });
+              });
+            }
           });
         });
       });
@@ -309,7 +329,7 @@ app.post('/submitExhibition', (req, res) => {
                     res.status(500).send('Error creating middleware folder');
                   } else {
                     // Replace `${username}` with the actual username in the text content
-                    const replacedTxtContent = txtContent.replace('${Users.username}', username);
+                    const replacedTxtContent = txtContent.replace(`${username}`, username);
 
                     // Write content to text file
                     fs.writeFile(TXTfile, replacedTxtContent, (err) => {
@@ -440,7 +460,7 @@ app.post('/uploadArt',
                             return res.status(500).send('Error deleting text file');
                         }
 
-                        return res.json({ status: 'success', message: 'Images uploaded and images.json created' });
+                        return res.json({ status: 'success', message: 'Profile Pic successfully  added' });
                     }); 
                 });
             });
@@ -448,6 +468,75 @@ app.post('/uploadArt',
     }
 );
 
+app.post('/uploadProfilePic',
+    fileUpload({ createParentPath: true }),
+    filesPayloadExists,
+    fileExtLimiter(['.png', '.jpg', '.jpeg']),
+    fileSizeLimiter,
+    (req, res) => {
+        const files = req.files;
+        const uploadedImageNames = Object.keys(files).map(key => ({ name: files[key].name }));
+
+        // Read the path from the text file in the middleware folder
+        const middlewareFolderPath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\middleware';
+        fs.readdir(middlewareFolderPath, (err, filenames) => {
+            if (err) {
+                console.error('Error reading middleware folder:', err);
+                return res.status(500).send('Error reading middleware folder');
+            }
+
+            // Find the first text file in the middleware folder
+            const txtFile = filenames.find(filename => filename.endsWith('.txt'));
+
+            if (!txtFile) {
+                return res.status(400).json({ status: "error", message: "Text file not found in middleware folder" });
+            }
+
+            const txtFilePath = path.join(middlewareFolderPath, txtFile);
+
+            // Read the contents of the text file to get the destination folder path
+            fs.readFile(txtFilePath, 'utf8', (err, data) => {
+                if (err) {
+                    console.error('Error reading text file:', err);
+                    return res.status(500).send('Error reading text file');
+                }
+
+                const destinationFolderPath = data.trim(); // Remove any whitespace characters
+                const artExhibitFolderPath = path.join(destinationFolderPath, 'art-exhibit');
+
+                // Proceed with handling file uploads
+                Object.keys(files).forEach(key => {
+                    const filepath = path.join(artExhibitFolderPath, files[key].name);
+                    files[key].mv(filepath, (err) => {
+                        if (err) return res.status(500).json({ status: "error", message: err });
+                    });
+                });
+
+                // Write the uploaded image names to a JSON file
+                const imagesJSON = JSON.stringify(uploadedImageNames, null, 2); // null, 2 for pretty formatting
+
+                // Write the JSON object to images.json in the art-exhibit folder
+                const imagesJSONPath = path.join(artExhibitFolderPath, 'images.json');
+                fs.writeFile(imagesJSONPath, imagesJSON, (err) => {
+                    if (err) {
+                        console.error('Error writing images.json:', err);
+                        return res.status(500).send('Error writing images.json');
+                    }
+
+                    // Delete the text file after handling file uploads
+                    fs.unlink(txtFilePath, (err) => {
+                        if (err) {
+                            console.error('Error deleting text file:', err);
+                            return res.status(500).send('Error deleting text file');
+                        }
+
+                        return res.json({ status: 'success', message: 'Images uploaded and images.json created' });
+                    }); 
+                });
+            });
+        });
+    }
+);
 
 
 

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style_userprofilepage.css">
+</head>
+<body>
+    <header> 
+        <img src="/Images/Artistry_HorizontalLogo.PNG" style="width: 300px; height:100px">
+        <nav>
+            <div class="NavBar">
+                <ul>
+                    <li><a href="/Artistry/LoggedIn/HomePage.html">Home</a></li>
+                    <li><a href="/Artistry/LoggedIn/MediumPage.html">Medium</a></li>
+                    <li><a href="/Artistry/Exhibition/ExhibitionPage.html">Exhibition</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="Divider">
+        <hr>
+    </div>
+
+    <div class="Left-Side">
+        <div class="profile-picture-container"> 
+            
+        </div>
+        <ul>
+            <li>
+                <section class="profile">
+                    <div class="header">
+                        <p></p>
+                    </div>
+                    <li>
+                        <p>Jorge Rivera</p>
+                        <p>Jorge.rivera</p>
+                        <p>jorge.rivera@gmail.com</p>
+                    </li>
+                </section>
+
+                <!-- Form for file upload -->
+                <form id="uploadProfPic">
+                    <input type="file" id="myFiles" accept="image/*" multiple /> <!-- Input for selecting files -->
+                    <button type="submit">Submit</button> <!-- Button for submitting the form -->
+                </form>
+                <!-- Placeholder elements for displaying upload status -->
+                <h2></h2>
+                <h3></h3>
+            </li>
+        </ul>
+
+        <!-- LogOut button -->
+        <button type="button" onclick="logOut()">LogOut</button>
+    </div>
+
+    <div class="Right-Side">
+        <ul>
+            <li>
+                <div class="image-userprofile"> 
+                    <h2>Exhibition</h2>
+                    <p> Here's my work</p>
+                    <!-- Add code to display user portfolio images as needed -->
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- JavaScript code for handling form submission and loading profile picture -->
+    <script>
+                // Function to send files to the server
+        const sendFiles = async () => {
+            const myFiles = document.getElementById('myFiles').files; // Get selected files
+
+            const formData = new FormData(); // Create FormData object to store files
+
+            // Append each file to the FormData object
+            Object.keys(myFiles).forEach(key => {
+                formData.append(myFiles.item(key).name, myFiles.item(key));
+            });
+
+            // Send a POST request to the server with the FormData containing files
+            const response = await fetch('http://localhost:5500/uploadProfilePic', {
+                method: 'POST',
+                body: formData
+            });
+
+            // Parse response JSON
+            const json = await response.json();
+
+            // Display upload status and message
+            const h2 = document.querySelector('h2');
+            h2.textContent = `Status: ${json?.status}`;
+
+            const h3 = document.querySelector('h3');
+            h3.textContent = json?.message;
+            // Redirect to Exhibition.html if upload is successful
+            if (json?.status === 'success') {
+                //window.location.href = './Exhibition.html';
+            }
+
+
+        };
+
+        // Event listener for form submission
+        const form = document.getElementById('uploadProfPic');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent default form submission
+            sendFiles(); // Call function to send files to the server
+        });
+
+        function logOut() {
+        fetch('http://localhost:5500/deleteUserData', {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log(data); // Display success message or handle as needed
+
+            // Check if deletion was successful
+            if (data === 'User data deleted successfully') {
+                window.location.href = '/Artistry/ProfilePage.html'; // Redirect to the profile page
+            } else {
+                // Handle other cases if needed
+            }
+        }) 
+        .catch(error => {
+            console.error('Error:', error);
+            // Handle errors here
+        });
+        }
+
+        // Fetch user data from usr_data.json and create anchor tag
+        fetch('/Artistry/middleware/usr_data.json')
+        .then(response => response.json())
+        .then(data => {
+            // Get the username from the JSON data
+            const username = data.username;
+
+            // Create anchor tag
+            const userProfileLink = document.createElement('a');
+            userProfileLink.href = `/Artistry/DummyDB/Users/${username}/UserProfilePage.html`;
+            userProfileLink.textContent = 'My Profile';
+
+            // Create list item and append anchor tag
+            const listItem = document.createElement('li');
+            listItem.appendChild(userProfileLink);
+
+            // Append list item to the navigation menu
+            const nav = document.querySelector('nav ul');
+            nav.appendChild(listItem);
+            })
+        .catch(error => console.error('Error fetching user data:', error));
+
+
+        const profilePictureContainer = document.querySelector('.profile-picture-container');
+
+        // Fetch image name from images.json
+        fetch(`./user_imgs/profilepic/art-exhibit/images.json`)
+            .then(response => response.json())
+            .then(imageData => {
+                // Assuming imageData is an array containing image objects
+                // Take the first image name from the array (assuming there's only one image)
+                const imageName = imageData[0].name;
+
+                // Construct the image URL
+                const imageUrl = `./user_imgs/profilepic/art-exhibit/${imageName}`;
+
+                // Create <img> element
+                const imgElement = document.createElement("img");
+                imgElement.src = imageUrl;
+                imgElement.alt = "Profile Picture";
+
+                // Append <img> element to the profile picture container
+                profilePictureContainer.appendChild(imgElement);
+            })
+            .catch(error => console.error("Error fetching image data:", error));
+    </script>
+</body>
+</html>
