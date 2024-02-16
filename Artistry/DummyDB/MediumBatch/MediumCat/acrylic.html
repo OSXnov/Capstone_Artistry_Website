@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artistry</title>
+    <link rel="stylesheet" type="text/css" href="style_mediumcat.css">
+</head>
+
+<body>
+    <header>
+        <img src="/Images/Artistry_HorizontalLogo.PNG" style="width: 300px; height:100px">
+        <nav>
+            <div class="NavBar">
+                <ul>
+                    <li><a href="/Artistry/HomePage.html">Home</a></li>
+                    <li><a href="/Artistry/MediumPage.html">Medium</a></li>
+                    <li><a href="/Artistry/ProfilePage.html">Profile</a>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="Divider"> <hr> </div> <!-- horizontal line that divides -->
+
+    <main>      
+        <div class="watercolor-title">
+            <h2>Watercolor</h2>
+        </div>
+        <div class="art-medium" id="art-medium">
+            <!-- Images will be dynamically added here -->
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetchImages();
+        });
+
+        function fetchImages() {
+            const artMediumContainer = document.getElementById("art-medium");
+
+            // Check if artMediumContainer exists
+            if (!artMediumContainer) {
+                console.error("Art medium container not found!");
+                return;
+            }
+
+            // Fetch images from folder
+            fetch("/Images/WaterColor/Images.json")
+                .then(response => response.json())
+                .then(images => {
+                    images.forEach(image => {
+                        const imgName = image.name;
+                        const imgSrc = `/Images/WaterColor/${imgName}`;
+                        const exhibitDiv = document.createElement("div");
+                        exhibitDiv.classList.add("medium-art");
+
+                        const imgElement = document.createElement("img");
+                        imgElement.src = imgSrc;
+                        imgElement.alt = "IMG";
+                        exhibitDiv.appendChild(imgElement);
+
+                        const seeArtLink = document.createElement("a");
+                        seeArtLink.classList.add("see-art");
+                        seeArtLink.href = imgSrc;
+                        seeArtLink.textContent = "SEE ART";
+                        exhibitDiv.appendChild(seeArtLink);
+
+                        artMediumContainer.appendChild(exhibitDiv);
+                    });
+                })
+                .catch(error => console.error("Error fetching images:", error));
+        }
+    </script>
+</body>
+</html>
