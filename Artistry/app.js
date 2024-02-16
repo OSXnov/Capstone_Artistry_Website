@@ -435,10 +435,12 @@ app.post('/uploadArt',
 
 
 
+
+
 app.delete('/deleteUserData', async (req, res) => {
   try {
       // Path to the usr_data.json file
-      const filePath = '/Artistry/middleware/usr_data.json';
+      const filePath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\middleware\\usr_data.json';
       
       // Delete the file
       await fs.unlink(filePath);
