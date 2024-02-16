@@ -77,14 +77,17 @@ p{
   left: 50%;
   transform: translateX(-50%);
 }
-
-.view-more {
-  padding: 10px 20px;
-  text-decoration: none;
-  color: white;
-  background-color: black;
-  border-radius: 5px;
-}
+.see-art {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  background-color: burlywood; 
+  color: black; /* Set the text color to white or your desired color */
+  text-decoration: none; /* Remove underlines from the link */
+  border-radius: 5px; /* Optional: Add rounded corners */
+  font-family: MontSerrat;
+  
+  }
 
 h1 {
   color: black;
@@ -146,26 +149,9 @@ p {
   width: 200px;
   text-align: center;
   margin: 10px;
-  float: left;
 }
 
-.art-medium img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-}
 
-.view-artist {
-  display: block;
-  margin: 10px auto;
-  padding: 10px;
-  background-color: burlywood; 
-  color: black; /* Set the text color to white or your desired color */
-  text-decoration: none; /* Remove underlines from the link */
-  border-radius: 5px; /* Optional: Add rounded corners */
-  font-family: MontSerrat;
-
-}
 
 .art-medium p{
   font-weight: bold;
@@ -177,4 +163,12 @@ p {
   width: 100%;
   height: 150px; /* Set the desired height */
   object-fit: cover; /* Preserve aspect ratio while covering the specified height */
+}
+
+
+.art-medium {
+  display: inline-block;
+  width: 200px;
+  text-align: center;
+  margin: 10px;
 }
