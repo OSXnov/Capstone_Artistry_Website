@@ -140,8 +140,6 @@ margin: 10px;
 float: center;
 }
 
-
-
 .see-more {
 display: block;
 margin: 10px auto;
@@ -151,7 +149,6 @@ color: black; /* Set the text color to white or your desired color */
 text-decoration: none; /* Remove underlines from the link */
 border-radius: 5px; /* Optional: Add rounded corners */
 font-family: MontSerrat;
-
 }
 
 .art-medium p{
@@ -179,3 +176,55 @@ color: burlywood; /* Set the text color */
 font-family: Montserrat, sans-serif; /* Set the font family */
 }
 
+.art-medium-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust the width of the columns as needed */
+  gap: 10px; /* Reduce the gap between grid items */
+}
+
+.art-medium {
+  text-align: center;
+}
+
+.art-medium img {
+  width: 100%;
+  height: 150px; /* Set the desired height */
+  object-fit: cover; /* Preserve aspect ratio while covering the specified height */
+}
+
+.art-medium p {
+  font-weight: bold;
+  color: darkgoldenrod;
+}
+/*-----------------*/
+.Medium-batch {
+  text-align: center;
+  margin-bottom: 20px; /* Add margin to push the divider down */
+}
+
+.Medium-batch img {
+  width: 50%; /* Set the desired width */
+  height: auto; /* Maintain aspect ratio */
+  margin-bottom: 10px; /* Add some space between the image and the button */
+}
+
+.batch-content {
+  display: flex;
+  justify-content: center;
+}
+
+.see-batch {
+  display: block;
+  margin-top: 10px; /* Adjust the top margin */
+  padding: 10px 20px;
+  background-color: burlywood; 
+  color: black; 
+  text-decoration: none; 
+  border-radius: 5px; 
+  font-family: MontSerrat;
+  transition: background-color 0.3s; /* Add transition effect */
+}
+
+.see-batch:hover {
+  background-color: #a17f50; /* Change color on hover */
+}

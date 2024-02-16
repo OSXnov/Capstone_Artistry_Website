@@ -15,7 +15,7 @@
                 <ul>
                     <li><a href="/Artistry/HomePage.html">Home</a></li>
                     <li><a href="/Artistry/MediumPage.html">Medium</a></li>
-                    <li><a href="/Artistry/ProfilePage.html">Profile</a>
+                    <li><a href="/Artistry/ProfilePage.html">Profile</a></li>
                 </ul>
             </div>
         </nav>
@@ -24,9 +24,9 @@
 
     <main>      
         <div class="watercolor-title">
-            <h2>Oil Painting</h2>
+            <h2>Oil Paintings</h2>
         </div>
-        <div class="art-medium" id="art-medium">
+        <div class="art-medium-container" id="art-medium-container">
             <!-- Images will be dynamically added here -->
         </div>
     </main>
@@ -37,7 +37,7 @@
         });
 
         function fetchImages() {
-            const artMediumContainer = document.getElementById("art-medium");
+            const artMediumContainer = document.getElementById("art-medium-container");
 
             // Check if artMediumContainer exists
             if (!artMediumContainer) {
