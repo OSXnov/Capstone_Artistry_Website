@@ -408,7 +408,13 @@ app.post('/uploadArt',
 );
 
 
+app.post("/uploadProfilePic", 
 
+
+
+
+
+)
 
 // Start the server
 app.listen(port, () => {
