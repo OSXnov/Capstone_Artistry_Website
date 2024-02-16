@@ -60,7 +60,6 @@ const loggedInUsers = {}; // Store logged-in users in memory
 app.post('/register', (req, res) => {
   console.log('Request body:', req.body);
   const { first_name, last_name, user_name, email, password, age } = req.body;
-
   const artist = new Artist(first_name, last_name, user_name, email, password, age);
 
   // Insert data into the database
@@ -68,67 +67,84 @@ app.post('/register', (req, res) => {
   connection.query(query, [artist.firstname, artist.lastname, artist.age, artist.email, artist.username, artist.password], (err, results) => {
     if (err) {
       console.error('Error inserting data:', err);
-      res.status(500).send('Internal Server Error');
-    } else {
-      console.log('');
-      const { username } = req.body;
-      loggedInUsers[req.sessionID] = username; // Store username in memory based on session ID
+      return res.status(500).send('Internal Server Error');
+    }
 
+    console.log('');
+    const { username } = req.body;
+    loggedInUsers[req.sessionID] = username; // Store username in memory based on session ID
 
-      // Task 1: Locate a folder at a specific path
-      const sourceFolderPath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\BaseData\\UserBaseData\\';
-      const destinationFolderPath = `C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\DummyDB\\Users\\${artist.username}`;
+    // Task 1: Locate a folder at a specific path
+    const sourceFolderPath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\BaseData\\UserBaseData\\';
+    const destinationFolderPath = `C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\DummyDB\\Users\\${artist.username}`;
 
-      // Create user directory
-      fs.mkdir(destinationFolderPath, { recursive: true }, (err) => {
+    // Create user directory
+    fs.mkdir(destinationFolderPath, { recursive: true }, (err) => {
+      if (err) {
+        console.error('Error creating folder:', err);
+        return res.status(500).send('Error creating folder');
+      }
+
+      // Copy the entire source folder and its contents to the destination folder
+      fs.copy(sourceFolderPath, destinationFolderPath, (err) => {
         if (err) {
-          console.error('Error creating folder:', err);
-          res.status(500).send('Error creating folder');
-          return;
+          console.error('Error copying files:', err);
+          return res.status(500).send('Error copying files');
         }
 
-        // Copy the entire source folder and its contents to the destination folder
-        fs.copy(sourceFolderPath, destinationFolderPath, (err) => {
-          if (err) {
-            console.error('Error copying files:', err);
-            res.status(500).send('Error copying files');
-            return;
-          }
-          console.log('');
+        console.log('');
 
-          // Read UserProfilePage.html file
-          fs.readFile(path.join(destinationFolderPath, 'UserProfilePage.html'), 'utf8', (err, data) => {
+        // Read UserProfilePage.html file
+        fs.readFile(path.join(destinationFolderPath, 'UserProfilePage.html'), 'utf8', (err, data) => {
+          if (err) {
+            console.error('Error reading file:', err);
+            return res.status(500).send('Error reading file');
+          }
+
+          // Replace placeholder values with user data
+          let userProfileData = data; // Make sure to initialize userProfileData with the original data
+          userProfileData = userProfileData.replace('{Users.User_name}', artist.username);
+          userProfileData = userProfileData.replace('{Users.firstname}', artist.firstname);
+          userProfileData = userProfileData.replace('{Users.lastname}', artist.lastname);
+          userProfileData = userProfileData.replace('{Users.email}', artist.email);
+
+          // You can add more replacements for other user data here
+          // Create user data JSON file
+          const userData = { username: username };
+          const middlewareDirectoryPath = path.join(__dirname, 'middleware');
+          const userDataFilePath = path.join(middlewareDirectoryPath, 'usr_data.json');
+
+          // Create the middleware directory if it doesn't exist
+          fs.mkdir(middlewareDirectoryPath, { recursive: true }, (err) => {
             if (err) {
-                console.error('Error reading file:', err);
-                return res.status(500).send('Error reading file');
+              console.error('Error creating middleware directory:', err);
+              return res.status(500).send('Error creating middleware directory');
             }
 
-            // Replace placeholder values with user data
-            let userProfileData = data; // Make sure to initialize userProfileData with the original data
+            // Write user data file
+            fs.writeFile(userDataFilePath, JSON.stringify(userData), (err) => {
+              if (err) {
+                console.error('Error creating user data file:', err);
+                return res.status(500).send('Error creating user data file');
+              }
+              console.log('User data file created successfully');
 
-            userProfileData = userProfileData.replace('{Users.User_name}', artist.username);
-            userProfileData = userProfileData.replace('{Users.firstname}', artist.firstname);
-            userProfileData = userProfileData.replace('{Users.lastname}', artist.lastname);
-            userProfileData = userProfileData.replace('{Users.email}', artist.email);
-
-            // You can add more replacements for other user data here
-
-            // Save the modified file
-            fs.writeFile(path.join(destinationFolderPath, 'UserProfilePage.html'), userProfileData, (err) => {
+              // Save the modified file
+              fs.writeFile(path.join(destinationFolderPath, 'UserProfilePage.html'), userProfileData, (err) => {
                 if (err) {
-                    console.error('Error saving file:', err);
-                    return res.status(500).send('Error saving file');
+                  console.error('Error saving file:', err);
+                  return res.status(500).send('Error saving file');
                 }
                 console.log('User registered and Files copied successfully');
-                res.status(200).send('User registered and Files copied successfully');
+                return res.status(200).send('User registered and Files copied successfully');
+              });
             });
           });
         });
       });
-    }
+    });
   });
 });
-
 
 
 app.post('/login', (req, res) => {
@@ -160,7 +176,7 @@ app.post('/login', (req, res) => {
 
           // Create user data JSON file
           const userData = { username: username };
-          const middlewareDirectoryPath = path.join(__dirname, 'Artistry', 'middleware');
+          const middlewareDirectoryPath = path.join(__dirname, 'middleware');
           const userDataFilePath = path.join(middlewareDirectoryPath, 'usr_data.json');
 
           // Create the middleware directory if it doesn't exist
