@@ -63,7 +63,7 @@
 
                  <!-- LogOut button -->
 
-        <button id="logoutButton">LogOut</button>
+        <button type="button" onclick="logOut()">LogOut</button>
     </div>
 
     <div class="Right-Side">
@@ -122,6 +122,33 @@
         sendFiles(); // Call function to send files to the server
     });
 
+    function logOut() {
+    fetch('http://localhost:5500/deleteUserData', {
+        method: 'DELETE'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(data => {
+        console.log(data); // Display success message or handle as needed
+
+        // Check if deletion was successful
+        if (data === 'User data deleted successfully') {
+            window.location.href = '/Artistry/ProfilePage.html'; // Redirect to the profile page
+        } else {
+            // Handle other cases if needed
+        }
+    }) 
+    .catch(error => {
+        console.error('Error:', error);
+        // Handle errors here
+    });
+}
+
+
 
 
     // Fetch user data from usr_data.json and create anchor tag
@@ -146,22 +173,6 @@
         })
         .catch(error => console.error('Error fetching user data:', error));
 
-        document.getElementById('logoutButton').addEventListener('click', async () => {
-            try {
-                const response = await fetch('/deleteUserData', {
-                    method: 'DELETE'
-                });
-                if (response.ok) {
-                    console.log('usr_data.json deleted successfully');
-                    // Redirect user to ProfilePage.html after logout
-                    window.location.href = '/Artistry/ProfilePage.html';
-                } else {
-                    console.error('Failed to delete usr_data.json');
-                }
-            } catch (error) {
-                console.error('Error deleting usr_data.json:', error);
-            }
-        });
 </script>
 
 
