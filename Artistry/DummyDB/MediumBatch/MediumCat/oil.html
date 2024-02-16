@@ -24,7 +24,7 @@
 
     <main>      
         <div class="watercolor-title">
-            <h2>Oil</h2>
+            <h2>Oil Painting</h2>
         </div>
         <div class="art-medium" id="art-medium">
             <!-- Images will be dynamically added here -->
@@ -46,12 +46,12 @@
             }
 
             // Fetch images from folder
-            fetch("/Images/WaterColor/Images.json")
+            fetch("/Images/Oil/Images.json")
                 .then(response => response.json())
                 .then(images => {
                     images.forEach(image => {
                         const imgName = image.name;
-                        const imgSrc = `/Images/WaterColor/${imgName}`;
+                        const imgSrc = `/Images/Oil/${imgName}`;
                         const exhibitDiv = document.createElement("div");
                         exhibitDiv.classList.add("art-medium");
 

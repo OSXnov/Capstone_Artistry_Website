@@ -107,9 +107,6 @@ ul {
   background-color: white;
 }
 
-li {
-  float: right;
-}
 
 li a {
   display: block;
@@ -144,31 +141,21 @@ p {
 }
 
 
-
-.art-medium {
-  width: 200px;
-  text-align: center;
-  margin: 10px;
-}
-
-
-
-.art-medium p{
-  font-weight: bold;
-  color: darkgoldenrod;
-}
-
-
-.art-medium img {
-  width: 100%;
-  height: 150px; /* Set the desired height */
-  object-fit: cover; /* Preserve aspect ratio while covering the specified height */
-}
-
-
 .art-medium {
   display: inline-block;
   width: 200px;
   text-align: center;
   margin: 10px;
+
+}
+
+.art-medium p {
+  font-weight: bold;
+  color: darkgoldenrod;
+}
+
+.art-medium img {
+  width: 100%;
+  height: 150px; /* Set the desired height */
+  object-fit: cover; /* Preserve aspect ratio while covering the specified height */
 }
