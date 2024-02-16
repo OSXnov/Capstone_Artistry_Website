@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artistry</title>
+    <link rel="stylesheet" type="text/css" href="style_mediumcat.css">
+</head>
+
+<body>
+    <header>
+        <img src="/Images/Artistry_HorizontalLogo.PNG" style="width: 300px; height:100px">
+        <nav>
+            <div class="NavBar">
+                <ul>
+                    <li><a href="/Artistry/LoggedIn/HomePage.html">Home</a></li>
+                    <li><a href="/Artistry/LoggedIn/MediumPage.html">Medium</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="Divider"> <hr> </div> <!-- horizontal line that divides -->
+
+    <main>      
+        <div class="watercolor-title">
+            <h2>Acrylic Paintings</h2>
+        </div>
+        <div class="art-medium-container" id="art-medium-container">
+            <!-- Images will be dynamically added here -->
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetchImages();
+        });
+
+        function fetchImages() {
+            const artMediumContainer = document.getElementById("art-medium-container");
+
+            // Check if artMediumContainer exists
+            if (!artMediumContainer) {
+                console.error("Art medium container not found!");
+                return;
+            }
+
+            // Fetch images from folder
+            fetch("/Images/Acrylic/Images.json")
+                .then(response => response.json())
+                .then(images => {
+                    images.forEach(image => {
+                        const imgName = image.name;
+                        const imgSrc = `/Images/Acrylic/${imgName}`;
+                        const exhibitDiv = document.createElement("div");
+                        exhibitDiv.classList.add("art-medium");
+
+                        const imgElement = document.createElement("img");
+                        imgElement.src = imgSrc;
+                        imgElement.alt = "IMG";
+                        exhibitDiv.appendChild(imgElement);
+
+                        const seeArtLink = document.createElement("a");
+                        seeArtLink.classList.add("see-art");
+                        seeArtLink.href = imgSrc;
+                        seeArtLink.textContent = "SEE ART";
+                        exhibitDiv.appendChild(seeArtLink);
+
+                        artMediumContainer.appendChild(exhibitDiv);
+                    });
+                })
+                .catch(error => console.error("Error fetching images:", error));
+
+        }
+
+                    // Fetch user data from usr_data.json and create anchor tag
+                    fetch('/Artistry/middleware/usr_data.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Get the username from the JSON data
+                        const username = data.username;
+
+                        // Create anchor tag
+                        const userProfileLink = document.createElement('a');
+                        userProfileLink.href = `/Artistry/DummyDB/Users/${username}/UserProfilePage.html`;
+                        userProfileLink.textContent = 'My Profile';
+
+                        // Create list item and append anchor tag
+                        const listItem = document.createElement('li');
+                        listItem.appendChild(userProfileLink);
+
+                        // Append list item to the navigation menu
+                        const nav = document.querySelector('nav ul');
+                        nav.appendChild(listItem);
+                    })
+                    .catch(error => console.error('Error fetching user data:', error));
+    </script>
+</body>
+</html>

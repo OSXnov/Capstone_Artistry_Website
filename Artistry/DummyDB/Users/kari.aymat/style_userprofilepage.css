@@ -16,18 +16,20 @@ body {
   margin-left: 20px;
 }
 
-.Left-Side {
-  width: 50%; /* Adjust width as needed */
-  margin: 0 auto; /* Center the element horizontally */
+.Left-Side, .Right-Side {
+  float: left;
+  width: 50%; /* Each div takes half of the container width */
 }
 
-.Left-Side ul{
+.Left-Side ul,
+.Right-Side ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-.Left-Side li {
+.Left-Side li,
+.Right-Side li {
   margin-bottom: 8px;
 }
 

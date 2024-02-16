@@ -1,8 +1,8 @@
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat';
   margin: 0;
   padding: 0; 
-  background-color: #f2f2f2;
+  background-color: #fff;
 }
 
 .Divider hr {
@@ -57,12 +57,12 @@ body {
   color: #333;
   border: none;
   border-radius: 4px;
-  background-color: #f2f2f2;
+  background-color: #fff;
 }
 
 .container input[type=text]:focus,
 .container input[type=password]:focus {
-  background-color: #e1e1e1;
+  background-color: #fff;
 }
 
 .container button {
