@@ -8,6 +8,7 @@ const fs = require('fs-extra'); // Import the fs module
 const path = require('path');
 const fileUpload = require("express-fileupload");
 const session = require("express-session");
+const crypto = require('crypto');
 
 
 const app = express();
@@ -16,6 +17,10 @@ const port = 5500;
 app.use(cors()); 
 app.use(express.static('public'));
 app.use(express.json()); // Add this line to parse JSON data
+
+
+
+
 
 
 // MYSQL connection
@@ -48,14 +53,7 @@ app.use('/Artistry/DummyDB', express.static(path.join(__dirname, 'DummyDB')));
 const filesPayloadExists = require('./middleware/filePayloadExist');
 const fileExtLimiter = require('./middleware/fileExtLimiter');
 const fileSizeLimiter = require('./middleware/fileSizeLimiter');
-
-app.use(session({
-  secret: 'your-secret-key',
-  resave: false,
-  saveUninitialized: true
-}));
-
-
+const loggedInUsers = {}; // Store logged-in users in memory
 
 //Server Side BackEND
 // Handle user registration and file operations
@@ -73,6 +71,9 @@ app.post('/register', (req, res) => {
       res.status(500).send('Internal Server Error');
     } else {
       console.log('');
+      const { username } = req.body;
+      loggedInUsers[req.sessionID] = username; // Store username in memory based on session ID
+
 
       // Task 1: Locate a folder at a specific path
       const sourceFolderPath = 'C:\\Users\\ricar\\Documents\\Artistry\\Capstone_Artistry_Website\\Artistry\\BaseData\\UserBaseData\\';
@@ -132,9 +133,9 @@ app.post('/register', (req, res) => {
 
 app.post('/login', (req, res) => {
   console.log('Request body:', req.body);
-  
+
   // Parse the request body JSON string
-  const {username, password} = req.body;
+  const { username, password } = req.body;
   const artist = new Artist(null, null, username, null, password, null);
 
   // Validate if the directory exists for the provided username
@@ -151,14 +152,36 @@ app.post('/login', (req, res) => {
       if (err) {
         console.error('Error validating login:', err);
         return res.status(500).send('Internal Server Error');
-      } 
-      else {
+      } else {
         console.log('Query results:', results); // Add this line to check query results
         if (results.length > 0) {
+          // Login successful
           console.log('Login successful');
-          return res.status(200).send('Login successful');
-        } 
-        else {
+
+          // Create user data JSON file
+          const userData = { username: username };
+          const middlewareDirectoryPath = path.join(__dirname, 'Artistry', 'middleware');
+          const userDataFilePath = path.join(middlewareDirectoryPath, 'usr_data.json');
+
+          // Create the middleware directory if it doesn't exist
+          fs.mkdir(middlewareDirectoryPath, { recursive: true }, (err) => {
+            if (err) {
+              console.error('Error creating middleware directory:', err);
+              return res.status(500).send('Error creating middleware directory');
+            }
+
+            // Write user data file
+            fs.writeFile(userDataFilePath, JSON.stringify(userData), (err) => {
+              if (err) {
+                console.error('Error creating user data file:', err);
+                return res.status(500).send('Error creating user data file');
+              }
+              console.log('User data file created successfully');
+              return res.status(200).send('Login successful');
+            });
+          });
+        } else {
+          // Invalid username or password
           console.log('Invalid username or password');
           return res.status(401).send('Invalid username or password');
         }
@@ -166,6 +189,7 @@ app.post('/login', (req, res) => {
     });
   });
 });
+
 
 // Function to save username to JSON file
 function saveUsernameToJson(username) {
@@ -214,6 +238,7 @@ function saveUsernameToJson(username) {
 }
 
 app.post('/submitExhibition', (req, res) => {
+  
 
   // Extract form data
   const { username, password, Title, briefdesc, category } = req.body;
@@ -221,8 +246,6 @@ app.post('/submitExhibition', (req, res) => {
   // Authenticate user
   const artist = new Artist(null, null, username, null, password, null); // Create Artist object with username and password
 
-  // Store username in the session
-  req.session.username = username;
 
   // Validate user credentials before proceeding
   const query = 'SELECT * FROM users WHERE username = ? AND password = ?';
@@ -235,6 +258,8 @@ app.post('/submitExhibition', (req, res) => {
       if (results.length > 0) {
         console.log('Login successful');
         const email = results[0].email; 
+        const { username } = req.body;
+        loggedInUsers[req.sessionID] = username; // Store username in memory based on session ID
 
 
         // If login is successful, insert exhibition data
@@ -408,6 +433,24 @@ app.post('/uploadArt',
 );
 
 
+
+
+app.delete('/deleteUserData', async (req, res) => {
+  try {
+      // Path to the usr_data.json file
+      const filePath = '/Artistry/middleware/usr_data.json';
+      
+      // Delete the file
+      await fs.unlink(filePath);
+      
+      // Send a success response
+      res.status(200).send('User data deleted successfully');
+  } catch (error) {
+      // Send an error response if deletion fails
+      console.error('Error deleting user data:', error);
+      res.status(500).send('Failed to delete user data');
+  }
+});
 
 
 // Start the server

@@ -176,6 +176,7 @@ color: burlywood; /* Set the text color */
 font-family: Montserrat, sans-serif; /* Set the font family */
 }
 
+<<<<<<< HEAD:Artistry/LoggedIn/style_mediumpageLI.css
 .art-medium-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjust the width of the columns as needed */
@@ -227,4 +228,31 @@ font-family: Montserrat, sans-serif; /* Set the font family */
 
 .see-batch:hover {
   background-color: #a17f50; /* Change color on hover */
+=======
+.Medium-batch {
+  margin: 20px;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.Medium-batch img {
+  width: 100%;
+  height: auto;
+}
+
+.see-batch {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.see-batch:hover {
+  background-color: #0056b3;
+>>>>>>> 67f2feb57ba81d69fcf690c49c1a6c01afaa2c4f:Artistry/LoggedIn/style_mediumpage.css
 }
