@@ -135,19 +135,35 @@ p {
 
 
 .watercolor-title{
-  color: darkolivegreen;
+  /*color: darkolivegreen;*/
+  color: darkgoldenrod;
   font-family: MontSerrat;
   font-size: 32px;
 }
 
+.art-medium-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust the column width as needed */
+  grid-gap: 10px; /* Adjust the gap between items */
+}
 
+.art-medium {
+  text-align: center;
+}
+
+/*.art-medium img {
+  width: 100%;
+  height: auto;
+}*/
+
+
+/*
 .art-medium {
   display: inline-block;
   width: 200px;
   text-align: center;
   margin: 10px;
-
-}
+}*/
 
 .art-medium p {
   font-weight: bold;
@@ -159,3 +175,10 @@ p {
   height: 150px; /* Set the desired height */
   object-fit: cover; /* Preserve aspect ratio while covering the specified height */
 }
+
+.see-more {
+  display: block;
+  margin-top: 20px;
+}
+
+
